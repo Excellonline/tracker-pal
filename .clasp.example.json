@@ -1,0 +1,17 @@
+{
+  "scriptId": "your-script-id",
+  "rootDir": "src",
+  "parentId": "your-sheet-or-drive-parent-id",
+  "scriptExtensions": [
+    ".js",
+    ".gs"
+  ],
+  "htmlExtensions": [
+    ".html"
+  ],
+  "jsonExtensions": [
+    ".json"
+  ],
+  "filePushOrder": [],
+  "skipSubdirectories": false
+}

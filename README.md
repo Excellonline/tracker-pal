@@ -1,51 +1,31 @@
-# TrackerPal
+<div align="center">
+  <img src="assets/TrackerPal-wordmark.png" alt="TrackerPal" width="420">
 
-TrackerPal is a private Google Apps Script + Google Sheet app for online orders and packages.
+  <p><strong>Private Gmail and Google Sheets package tracking, powered by Google Apps Script.</strong></p>
 
-The script scans Gmail on a schedule, extracts order and shipping details from matching emails, writes them into a Google Sheet, and sends a daily summary of items that are not checked off as received.
+  <p>
+    <a href="https://github.com/Excellonline/tracker-pal/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Excellonline/tracker-pal/actions/workflows/ci.yml/badge.svg"></a>
+    <img alt="Node.js >=20" src="https://img.shields.io/badge/node-%3E%3D20-339933">
+    <img alt="Google Apps Script" src="https://img.shields.io/badge/Google%20Apps%20Script-ready-4285F4">
+  </p>
+</div>
 
-## What it tracks
+## Overview
 
-The `Orders` sheet contains:
+TrackerPal is a personal package tracker for people who want order and delivery status in a spreadsheet they control. It scans Gmail with Google Apps Script, extracts shipment details from order emails, deduplicates updates, writes everything into Google Sheets, and sends a daily summary for packages that still need attention.
 
-`Received`, `Status`, `Store`, `Item`, `Order Number`, `Carrier`, `Tracking Number`, `Estimated Arrival`, `Tracking URL`, `Last Update`, `Source Date`, `Source Subject`, `Gmail Thread ID`, `Gmail Message ID`, `Notes`
+No external backend is required. The data stays in the owner's Gmail, Google Sheet, and Apps Script project.
 
-Delivered emails set `Status` to `Delivered`, but the `Received` checkbox stays manual so you can confirm the package actually made it into your hands.
+## Highlights
 
-The `Dashboard` sheet shows quick counts for open items, overdue arrivals, due-today arrivals, delivery exceptions, delivered-but-not-checked items, missing ETA items, and open items by ETA.
+- Gmail scanner for order confirmations, shipment notices, delivery updates, delays, and exceptions.
+- Google Sheets dashboard with open items, overdue packages, due-today packages, delivered-but-unchecked items, and missing ETA alerts.
+- Manual `Received` checkbox so delivered emails do not automatically mark a package as physically received.
+- Manual entry workflow for orders that do not arrive through the tracked Gmail account.
+- Optional web UI variants for a cleaner TrackerPal front end.
+- Local Node.js tests covering parsing, Gmail import behavior, summaries, Apps Script smoke checks, and Sheets logic.
 
-The `Orders` sheet includes status/carrier dropdowns and row highlighting for delivered, overdue, due-today, exception, and missing-ETA rows.
-
-The `Manual Entry` sheet lets you add packages that did not arrive through the tracked Gmail account, including in-person orders, another email account, cash/receipt orders, or one-off items with no tracking email.
-
-## Created Google project
-
-TrackerPal now uses two Apps Script projects:
-
-- Gmail automation and Sheet setup: <https://script.google.com/d/11SkAc1NF0FOLSVFEJlCRf28RdlMHxcg5KycOHUKI8JuPekyuEhYRH3bJ/edit>
-- Sheet data store: <https://drive.google.com/open?id=1-ccGyXrzjSSvm73NJgdTQ6kO4ulMsR1c-1clBIxE7Uc>
-- TrackerPal Desktop app: <https://script.google.com/macros/s/AKfycbw-1VmCIHNVcEO-qvjtE2i9ORDNiz4C3nqBNbFwjGgTlGR_Q4mRW7TLy11W86BXWAOn/exec>
-- TrackerPal Desktop Apps Script: <https://script.google.com/d/1aH8e7_ba8IRCKNd0WXIrkp27u9XzR3kH0WJkZRbfUbYE4NZ-weY1Zh_C/edit>
-- Desktop URL shortcut: `C:\Users\Sever\Desktop\TrackerPal.url`
-- Normal Chrome launcher: `C:\Users\Sever\Desktop\TrackerPal.lnk`
-
-The desktop app is intentionally separate and bound to the tracker Sheet. It opens for signed-in Google users through a secret-key URL and runs as the Sheet owner, so opening the desktop app should not show a Google OAuth permission-review screen. The Gmail scanner stays in the original automation project because Gmail scopes can make a web app authorization flow show Google's blocked-app screen.
-
-Treat the full desktop app URL, including the `key=` value in the shortcuts, like a password. Anyone with that full URL can open the tracker UI.
-
-If Google shows "This app is blocked", close that blocked window and open `C:\Users\Sever\Desktop\TrackerPal.lnk` instead. The launcher uses the signed-in owner-run URL and should not trigger a Google permission review.
-
-`npx clasp status` should show no untracked Apps Script files before pushing the Gmail automation project.
-
-For the separate desktop app, run clasp from `trackerpal-bound-ui` with `-P .`, for example:
-
-```powershell
-node ..\node_modules\@google\clasp\build\src\index.js -P . push --force
-```
-
-Do not run `npm run create` again unless you intentionally want a second tracker Sheet. This folder is already bound to the project above.
-
-## Local setup
+## Quick Start
 
 Install dependencies:
 
@@ -53,70 +33,19 @@ Install dependencies:
 npm install
 ```
 
-Run local parser tests:
+Run the local test suite:
 
 ```powershell
 npm test
 ```
 
-Log in to Google for clasp:
+Log in to Google Apps Script tooling:
 
 ```powershell
 npm run login
 ```
 
-Enable the Apps Script API for clasp:
-
-1. Open <https://script.google.com/home/usersettings>
-2. Turn on **Google Apps Script API**.
-3. Wait a minute if Google says the setting is still propagating.
-
-This workspace is already bound to the Google project above. For this tracker, use:
-
-```powershell
-npm run push
-npm run open
-```
-
-Only for a brand-new tracker in a different folder, create a new Google Sheet-bound Apps Script project:
-
-```powershell
-npm run create
-```
-
-Then push/open it:
-
-```powershell
-npm run push
-npm run open
-```
-
-Run setup from the Apps Script editor rather than `clasp run`; first-run Gmail/Sheets authorization must happen in the owner account's browser session.
-
-## First run in Apps Script
-
-In the Apps Script editor:
-
-1. Run `setupOrderTracker` and approve the requested permissions.
-2. Run `installTriggers` to create the hourly Gmail scan and 8 AM Eastern daily summary.
-3. Run `backfillOrders` once to import the last 60 days.
-4. Run `healthCheck` to confirm the tabs and triggers are in place.
-5. Open TrackerPal from the desktop shortcut or `Order Tracker > Open TrackerPal`.
-
-The custom `Order Tracker` menu also appears when the spreadsheet opens.
-It includes quick jumps to `Dashboard` and `Orders`, manual sync/backfill commands, summary sending, trigger install/removal, and `healthCheck`.
-It also includes:
-
-- `Add manual order`: quick prompt-based entry.
-- `Import manual entry`: reads the `Manual Entry` tab and adds/updates the order.
-
-## Morning deployment checklist
-
-If `npm run create` failed with `User has not enabled the Apps Script API`, do this first:
-
-1. Visit <https://script.google.com/home/usersettings>
-2. Turn on **Google Apps Script API**
-3. Run:
+Enable the Apps Script API at <https://script.google.com/home/usersettings>, then create or connect an Apps Script project:
 
 ```powershell
 npm run create
@@ -124,65 +53,67 @@ npm run push
 npm run open
 ```
 
-Then run these functions from the Apps Script editor:
+For an existing Apps Script project, create a local `.clasp.json` from `.clasp.example.json`, fill in your project IDs, and keep that file private. `.clasp.json` is intentionally ignored by git.
 
-```text
-setupOrderTracker
-installTriggers
-backfillOrders
-healthCheck
-```
+## First Run
 
-Google will ask for Gmail, Sheets, trigger, and email-send permissions the first time.
-Because this is your private script and not a published Google Marketplace app, Google may show an unverified-app warning; use the advanced option to continue to your own project.
+In the Apps Script editor, run these functions in order:
 
-The desktop app itself should not ask for Gmail, Sheets, or any other Google permission. If it asks for permission or shows "This app is blocked", the shortcut is pointing at an older deployment.
+1. `setupOrderTracker`
+2. `installTriggers`
+3. `backfillOrders`
+4. `healthCheck`
 
-## Settings
+Google will ask for Gmail, Sheets, trigger, and email-send permissions during first setup. Because TrackerPal is a private Apps Script app rather than a published Marketplace app, Google may show an unverified-app warning for the owner account.
 
-The `Settings` tab is created automatically. You can adjust:
+## Project Layout
 
-- `scan_days`: how far back the hourly sync scans.
-- `backfill_days`: how far back `backfillOrders` scans.
-- `timezone`: defaults to `America/New_York`.
-- `summary_enabled`: `TRUE` or `FALSE`.
-- `summary_recipient`: email address for the daily summary.
-- `summary_hour`: hour of day for the daily summary trigger.
-- `max_threads_per_query`: Gmail thread cap per search query.
+| Path | Purpose |
+| --- | --- |
+| `src/` | Main Apps Script source for Gmail scanning, parsing, Sheets setup, dashboarding, and web UI. |
+| `tests/` | Node.js tests for parser behavior, Apps Script loading, Gmail workflows, summaries, and Sheets updates. |
+| `assets/` | Brand assets and icons used by the README and UI variants. |
+| `trackerpal-bound-ui/` | Bound UI version for opening TrackerPal from the Sheet context. |
+| `trackerpal-desktop/` | Desktop-oriented Apps Script web app variant. |
+| `trackerpal-sheet-ui/` | Sheet UI manifest variant. |
+| `docs/` | Architecture and deployment notes. |
 
-If `summary_recipient` is blank, `installTriggers` still installs hourly sync but skips the daily summary trigger. Fill in the recipient and run `installTriggers` again.
+## Configuration
 
-Use `removeTriggers` from Apps Script or the `Order Tracker` menu if you ever want to pause automatic scanning without deleting the tracker.
+TrackerPal creates a `Settings` tab automatically. Common settings include:
 
-## Manual orders
+| Setting | Purpose |
+| --- | --- |
+| `scan_days` | How far back the hourly sync scans. |
+| `backfill_days` | How far back `backfillOrders` scans. |
+| `timezone` | Defaults to `America/New_York`. |
+| `summary_enabled` | Enables or disables daily summaries. |
+| `summary_recipient` | Email recipient for daily summaries. |
+| `summary_hour` | Hour of day for the daily summary trigger. |
+| `max_threads_per_query` | Gmail thread cap per search query. |
 
-For a quick one-off, use `Order Tracker > Add manual order`.
+If `summary_recipient` is blank, hourly sync still runs but the daily summary trigger is skipped.
 
-From Gmail, you can manually force an email into TrackerPal by applying the label `TrackerPal` to that email. The hourly sync checks that label for the last 365 days and imports those messages even when they do not match the normal shipping/order keywords.
+## Manual Orders
 
-To use it:
+Use `Order Tracker > Add manual order` for a quick one-off entry, or fill in the `Manual Entry` sheet and run `Order Tracker > Import manual entry`.
 
-1. Open the email in Gmail.
-2. Click the label icon.
-3. Choose or create the label `TrackerPal`.
-4. Wait for the hourly sync, or run `syncOrders` from Apps Script if you want it immediately.
+From Gmail, apply the label `TrackerPal` to force-import a low-signal message that the normal scanner would skip. The hourly sync checks that label for recent messages and imports them through the same dedupe path.
 
-This is the reliable v1 substitute for a Gmail toolbar button. A true Gmail button would require a Gmail Add-on or Chrome extension, which brings back Google's authorization/review issues.
+## Documentation
 
-For a calmer spreadsheet-style entry:
-
-1. Open the `Manual Entry` tab.
-2. Fill in any useful fields: store, item, order number, carrier, tracking number, ETA, tracking URL, and notes.
-3. Use `Order Tracker > Import manual entry`.
-
-Manual entries dedupe the same way email imports do: tracking number first, then store + order number, then a generated manual ID.
-
-Apps Script daily triggers run within Google's scheduled window around the selected hour, so the 8 AM summary may arrive shortly after 8.
+- [Deployment Guide](docs/DEPLOYMENT.md)
+- [Architecture Notes](docs/ARCHITECTURE.md)
+- [Contributing Guide](CONTRIBUTING.md)
+- [Security Policy](SECURITY.md)
+- [Changelog](CHANGELOG.md)
 
 ## Privacy
 
-No external backend is used. Data stays in your Gmail, your Google Sheet, and your Apps Script project.
+TrackerPal does not send package data to a third-party service. Gmail messages are read by the owner's Apps Script project, parsed inside Apps Script, and stored in the owner's Google Sheet.
 
-## Manual fallback
+Keep deployment URLs, secret keys, `.clasp.json`, `.clasprc.json`, and Google project IDs out of commits, issues, screenshots, and public docs.
 
-If clasp cannot be used, create a Google Sheet, open `Extensions > Apps Script`, and copy each file from `src/` into the Apps Script project. Then run `setupOrderTracker`, `installTriggers`, and `backfillOrders`.
+## License
+
+No open-source license has been published for this repository. Contact the repository owner before copying, modifying, or redistributing the project.

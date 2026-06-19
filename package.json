@@ -3,6 +3,24 @@
   "version": "0.3.0",
   "private": true,
   "description": "TrackerPal, a private Gmail + Google Sheets package tracker built with Google Apps Script.",
+  "keywords": [
+    "google-apps-script",
+    "gmail",
+    "google-sheets",
+    "package-tracking",
+    "clasp"
+  ],
+  "homepage": "https://github.com/Excellonline/tracker-pal#readme",
+  "bugs": {
+    "url": "https://github.com/Excellonline/tracker-pal/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Excellonline/tracker-pal.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "test": "node tests/manifest.test.js && node tests/parser.test.js && node tests/gmail.test.js && node tests/summary.test.js && node tests/apps-script-smoke.test.js && node tests/sheets.test.js",
     "clasp": "clasp",
