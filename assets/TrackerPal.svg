@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TrackerPal">
+  <rect width="64" height="64" rx="16" fill="#154846"/>
+  <path d="M18 21h28v28H18z" fill="#f6f4ec"/>
+  <path d="M22 17h20l4 4H18z" fill="#ffb85c"/>
+  <path d="M24 31l6 6 12-14" fill="none" stroke="#23a094" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

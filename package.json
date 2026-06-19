@@ -1,0 +1,17 @@
+{
+  "name": "trackerpal",
+  "version": "0.3.0",
+  "private": true,
+  "description": "TrackerPal, a private Gmail + Google Sheets package tracker built with Google Apps Script.",
+  "scripts": {
+    "test": "node tests/manifest.test.js && node tests/parser.test.js && node tests/gmail.test.js && node tests/summary.test.js && node tests/apps-script-smoke.test.js && node tests/sheets.test.js",
+    "clasp": "clasp",
+    "login": "clasp login",
+    "create": "clasp create --type sheets --title \"TrackerPal\" --rootDir src",
+    "push": "clasp push",
+    "open": "clasp open"
+  },
+  "devDependencies": {
+    "@google/clasp": "^3.0.6-alpha"
+  }
+}
