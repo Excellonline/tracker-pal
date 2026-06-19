@@ -4,7 +4,7 @@ This guide covers a private Google Apps Script deployment for TrackerPal.
 
 ## Prerequisites
 
-- Node.js 20 or newer
+- Node.js 22 or newer
 - npm
 - A Google account that owns the Gmail inbox and target Google Sheet
 - Google Apps Script API enabled at <https://script.google.com/home/usersettings>

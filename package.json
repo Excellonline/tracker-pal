@@ -19,7 +19,7 @@
     "url": "git+https://github.com/Excellonline/tracker-pal.git"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "test": "node tests/manifest.test.js && node tests/parser.test.js && node tests/gmail.test.js && node tests/summary.test.js && node tests/apps-script-smoke.test.js && node tests/sheets.test.js",

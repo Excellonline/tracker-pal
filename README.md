@@ -5,7 +5,7 @@
 
   <p>
     <a href="https://github.com/Excellonline/tracker-pal/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Excellonline/tracker-pal/actions/workflows/ci.yml/badge.svg"></a>
-    <img alt="Node.js >=20" src="https://img.shields.io/badge/node-%3E%3D20-339933">
+    <img alt="Node.js >=22" src="https://img.shields.io/badge/node-%3E%3D22-339933">
     <img alt="Google Apps Script" src="https://img.shields.io/badge/Google%20Apps%20Script-ready-4285F4">
   </p>
 </div>
