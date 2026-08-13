@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TrackerPal privacy details</title>
+    <link rel="stylesheet" href="privacy.css">
+  </head>
+  <body>
+    <main>
+      <div class="brand">
+        <img src="icons/icon-128.png" alt="">
+        <span>TrackerPal</span>
+      </div>
+      <h1>Your package list stays in Chrome</h1>
+      <p>TrackerPal stores package names, tracking numbers, carriers, delivery statuses, received states, and entry dates locally in your Chrome profile. TrackerPal has no advertising or analytics and does not send your package list to a TrackerPal server.</p>
+
+      <h2>What happens when you click Track</h2>
+      <p>TrackerPal opens the selected carrier's official tracking page in a new tab. The tracking number is included in that carrier URL so the carrier can show the shipment. The carrier handles that visit under its own privacy policy.</p>
+
+      <h2>Your control</h2>
+      <p>You can delete individual entries at any time, erase all TrackerPal information with the button below, or remove the extension. Removing TrackerPal from Chrome removes its locally stored extension data from that Chrome profile.</p>
+      <button class="delete-data" id="deleteAllData" type="button">Delete all TrackerPal data</button>
+      <p class="delete-status" id="deleteStatus" role="status" aria-live="polite"></p>
+
+      <h2>Permissions</h2>
+      <p>The <code>sidePanel</code> permission displays TrackerPal beside the current tab. The <code>storage</code> permission remembers your package list and consent choice. TrackerPal does not request permission to read websites, tabs, browsing history, email, cookies, or location.</p>
+
+      <p class="effective">Effective August 13, 2026</p>
+    </main>
+    <script src="privacy.js"></script>
+  </body>
+</html>

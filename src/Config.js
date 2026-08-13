@@ -1,7 +1,7 @@
 var ORDER_TRACKER_CONFIG = {
   appName: "TrackerPal",
-  version: "0.3.0",
-  desktopWebAppUrl: "https://script.google.com/macros/s/AKfycbw-1VmCIHNVcEO-qvjtE2i9ORDNiz4C3nqBNbFwjGgTlGR_Q4mRW7TLy11W86BXWAOn/exec?key=tp_7b6d0d9dbd934ce0b5f7d82a3e93fd2f",
+  version: "0.4.0",
+  desktopWebAppUrl: "",
   timezone: "America/New_York",
   sheets: {
     dashboard: "Dashboard",

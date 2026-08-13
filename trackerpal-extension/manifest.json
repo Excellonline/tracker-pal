@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "TrackerPal",
+  "version": "0.4.0",
+  "minimum_chrome_version": "114",
+  "description": "Track deliveries in Chrome and optionally connect your private Gmail and Google Sheets tracker.",
+  "permissions": ["sidePanel", "storage"],
+  "action": {
+    "default_title": "Open TrackerPal",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; frame-src https://script.google.com https://*.googleusercontent.com"
+  }
+}

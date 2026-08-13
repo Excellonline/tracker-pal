@@ -1,13 +1,15 @@
 {
   "name": "trackerpal",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
-  "description": "TrackerPal, a private Gmail + Google Sheets package tracker built with Google Apps Script.",
+  "description": "TrackerPal package tracking for Chrome, with an optional private Gmail and Google Sheets workflow.",
   "keywords": [
     "google-apps-script",
     "gmail",
     "google-sheets",
     "package-tracking",
+    "chrome-extension",
+    "side-panel",
     "clasp"
   ],
   "homepage": "https://github.com/Excellonline/tracker-pal#readme",
@@ -22,7 +24,9 @@
     "node": ">=22"
   },
   "scripts": {
-    "test": "node tests/manifest.test.js && node tests/parser.test.js && node tests/gmail.test.js && node tests/summary.test.js && node tests/apps-script-smoke.test.js && node tests/sheets.test.js",
+    "test": "node tests/manifest.test.js && node tests/parser.test.js && node tests/gmail.test.js && node tests/summary.test.js && node tests/apps-script-smoke.test.js && node tests/sheets.test.js && node tests/ui.test.js && node tests/extension.test.js && node tests/secrets.test.js",
+    "build:extension": "node scripts/build-extension.js",
+    "build:store": "node scripts/build-store-extension.js",
     "clasp": "clasp",
     "login": "clasp login",
     "create": "clasp create --type sheets --title \"TrackerPal\" --rootDir src",
@@ -30,6 +34,9 @@
     "open": "clasp open"
   },
   "devDependencies": {
-    "@google/clasp": "^3.0.6-alpha"
+    "@google/clasp": "^3.3.0"
+  },
+  "overrides": {
+    "uuid": "11.1.1"
   }
 }

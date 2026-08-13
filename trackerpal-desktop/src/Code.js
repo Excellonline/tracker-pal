@@ -1,7 +1,6 @@
 var TRACKERPAL = {
   appName: "TrackerPal",
-  version: "0.3.0",
-  spreadsheetId: "1-ccGyXrzjSSvm73NJgdTQ6kO4ulMsR1c-1clBIxE7Uc",
+  version: "0.4.0",
   timezone: "America/New_York",
   sheets: {
     dashboard: "Dashboard",
@@ -31,7 +30,16 @@ var TRACKERPAL = {
   logHeaders: ["Time", "Level", "Action", "Message", "Details"]
 };
 
-function doGet() {
+function doGet(e) {
+  if (!isAuthorizedRequest_(e)) {
+    return HtmlService.createHtmlOutput(
+      "<!doctype html><html><head><base target=\"_top\"><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>TrackerPal</title></head>" +
+      "<body style=\"font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;margin:0;min-height:100vh;display:grid;place-items:center;background:#edf5f0;color:#10271f;\">" +
+      "<main style=\"max-width:520px;padding:24px;text-align:center;\"><h1 style=\"margin:0 0 8px;font-size:28px;color:#065f46;\">TrackerPal is locked</h1><p style=\"margin:0;color:#586d64;line-height:1.5;\">Open TrackerPal from the desktop shortcut on this computer.</p></main>" +
+      "</body></html>"
+    ).setTitle("TrackerPal Locked");
+  }
+
   return HtmlService.createTemplateFromFile("TrackerPal")
     .evaluate()
     .setTitle("TrackerPal")
@@ -41,6 +49,18 @@ function doGet() {
 
 function include(filename) {
   return HtmlService.createHtmlOutputFromFile(filename).getContent();
+}
+
+function isAuthorizedRequest_(e) {
+  var privateConfig = getTrackerPalPrivateConfig_();
+  return Boolean(privateConfig.accessKey && e && e.parameter && e.parameter.key === privateConfig.accessKey);
+}
+
+function getTrackerPalPrivateConfig_() {
+  if (typeof TRACKERPAL_PRIVATE_CONFIG === "undefined" || !TRACKERPAL_PRIVATE_CONFIG.spreadsheetId || !TRACKERPAL_PRIVATE_CONFIG.accessKey) {
+    throw new Error("TrackerPal private configuration is missing.");
+  }
+  return TRACKERPAL_PRIVATE_CONFIG;
 }
 
 function getTrackerPalState() {
@@ -95,7 +115,7 @@ function updateTrackerPalStatus(rowIndex, status) {
 }
 
 function getSpreadsheet_() {
-  return SpreadsheetApp.openById(TRACKERPAL.spreadsheetId);
+  return SpreadsheetApp.openById(getTrackerPalPrivateConfig_().spreadsheetId);
 }
 
 function ensureWorkbook_(ss) {

@@ -1,6 +1,9 @@
 node_modules/
 .clasp.json
 .clasprc.json
+trackerpal-extension/config.js
+trackerpal-bound-ui/src/PrivateConfig.js
+trackerpal-desktop/src/PrivateConfig.js
 .env
 .env.*
 *.log

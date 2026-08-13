@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TrackerPal small promo tile</title>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { width: 440px; height: 280px; margin: 0; overflow: hidden; }
+      body {
+        position: relative;
+        display: grid;
+        place-items: center;
+        color: white;
+        background:
+          radial-gradient(circle at 82% 15%, rgba(167, 243, 208, .32), transparent 150px),
+          linear-gradient(135deg, #052e23 0%, #065f46 56%, #10b981 140%);
+        font-family: Aptos, "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+      }
+      body::before, body::after {
+        content: "";
+        position: absolute;
+        border: 1px solid rgba(255,255,255,.12);
+        border-radius: 999px;
+      }
+      body::before { width: 340px; height: 340px; left: -205px; top: 102px; }
+      body::after { width: 260px; height: 260px; right: -145px; top: -132px; }
+      main { position: relative; display: flex; align-items: center; gap: 20px; padding: 28px; }
+      .icon {
+        width: 116px;
+        height: 116px;
+        padding: 6px;
+        border-radius: 28px;
+        background: rgba(255,255,255,.12);
+        box-shadow: 0 22px 46px rgba(3, 30, 22, .34);
+      }
+      h1 { margin: 0; font-size: 39px; line-height: .95; letter-spacing: -.045em; }
+      h1 span { color: #a7f3d0; }
+      p { margin: 10px 0 0; color: #d1fae5; font-size: 15px; font-weight: 650; letter-spacing: .01em; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img class="icon" src="../../assets/TrackerPal-brand-icon-emerald.png" alt="">
+      <div>
+        <h1>Tracker<span>Pal</span></h1>
+        <p>Track every delivery.</p>
+      </div>
+    </main>
+  </body>
+</html>

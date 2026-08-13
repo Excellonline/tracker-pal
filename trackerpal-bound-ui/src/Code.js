@@ -1,7 +1,6 @@
 var TRACKERPAL = {
   appName: "TrackerPal",
-  version: "0.3.0",
-  accessKey: "tp_7b6d0d9dbd934ce0b5f7d82a3e93fd2f",
+  version: "0.4.0",
   timezone: "America/New_York",
   sheets: {
     dashboard: "Dashboard",
@@ -53,7 +52,15 @@ function include(filename) {
 }
 
 function isAuthorizedRequest_(e) {
-  return Boolean(e && e.parameter && e.parameter.key === TRACKERPAL.accessKey);
+  var privateConfig = getTrackerPalPrivateConfig_();
+  return Boolean(privateConfig.accessKey && e && e.parameter && e.parameter.key === privateConfig.accessKey);
+}
+
+function getTrackerPalPrivateConfig_() {
+  if (typeof TRACKERPAL_PRIVATE_CONFIG === "undefined" || !TRACKERPAL_PRIVATE_CONFIG.accessKey) {
+    throw new Error("TrackerPal private configuration is missing.");
+  }
+  return TRACKERPAL_PRIVATE_CONFIG;
 }
 
 function getTrackerPalState() {

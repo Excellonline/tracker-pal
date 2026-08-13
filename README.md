@@ -1,23 +1,28 @@
 <div align="center">
-  <img src="assets/TrackerPal-wordmark.png" alt="TrackerPal" width="420">
+  <img src="assets/TrackerPal-brand-icon-emerald.png" alt="TrackerPal" width="128">
 
-  <p><strong>Private Gmail and Google Sheets package tracking, powered by Google Apps Script.</strong></p>
+  <h1>TrackerPal</h1>
+
+  <p><strong>Modern emerald-green package tracking in Chrome, with optional private Gmail and Google Sheets workflows.</strong></p>
 
   <p>
     <a href="https://github.com/Excellonline/tracker-pal/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Excellonline/tracker-pal/actions/workflows/ci.yml/badge.svg"></a>
     <img alt="Node.js >=22" src="https://img.shields.io/badge/node-%3E%3D22-339933">
-    <img alt="Google Apps Script" src="https://img.shields.io/badge/Google%20Apps%20Script-ready-4285F4">
+    <img alt="Google Apps Script" src="https://img.shields.io/badge/Google%20Apps%20Script-ready-08734B">
   </p>
 </div>
 
 ## Overview
 
-TrackerPal is a personal package tracker for people who want order and delivery status in a spreadsheet they control. It scans Gmail with Google Apps Script, extracts shipment details from order emails, deduplicates updates, writes everything into Google Sheets, and sends a daily summary for packages that still need attention.
+TrackerPal is a package tracker with two complementary modes. The Chrome extension keeps a fast, private delivery list in the browser side panel. The optional personal Google Apps Script workflow can scan Gmail, deduplicate shipment updates, write them into Google Sheets, and send a daily summary.
 
-No external backend is required. The data stays in the owner's Gmail, Google Sheet, and Apps Script project.
+No TrackerPal backend is required. Local extension entries stay in the Chrome profile; the optional Google workflow stays in the owner's Gmail, Google Sheet, and Apps Script project.
 
 ## Highlights
 
+- Native Chrome side-panel tracker with automatic UPS, USPS, FedEx, and DHL recognition.
+- Local package storage, one-click carrier links, status controls, and received-package history.
+- Minimal Chrome permissions: side panel and storage only, with no website access.
 - Gmail scanner for order confirmations, shipment notices, delivery updates, delays, and exceptions.
 - Google Sheets dashboard with open items, overdue packages, due-today packages, delivered-but-unchecked items, and missing ETA alerts.
 - Manual `Received` checkbox so delivered emails do not automatically mark a package as physically received.
@@ -25,7 +30,23 @@ No external backend is required. The data stays in the owner's Gmail, Google She
 - Optional web UI variants for a cleaner TrackerPal front end.
 - Local Node.js tests covering parsing, Gmail import behavior, summaries, Apps Script smoke checks, and Sheets logic.
 
-## Quick Start
+## Chrome Extension
+
+The personal unpacked build is created in `Desktop\TrackerPal Chrome Extension`:
+
+```powershell
+npm run build:extension
+```
+
+Open `chrome://extensions`, enable **Developer mode**, choose **Load unpacked**, and select that Desktop folder. Click the TrackerPal icon to open the side panel.
+
+The public Chrome Web Store build is deliberately local-only so friends can use it without Google Apps Script access or Gmail permissions:
+
+```powershell
+npm run build:store
+```
+
+## Development
 
 Install dependencies:
 
@@ -70,6 +91,7 @@ Google will ask for Gmail, Sheets, trigger, and email-send permissions during fi
 
 | Path | Purpose |
 | --- | --- |
+| `trackerpal-extension/` | Manifest V3 Chrome side-panel extension and Store-safe local tracker. |
 | `src/` | Main Apps Script source for Gmail scanning, parsing, Sheets setup, dashboarding, and web UI. |
 | `tests/` | Node.js tests for parser behavior, Apps Script loading, Gmail workflows, summaries, and Sheets updates. |
 | `assets/` | Brand assets and icons used by the README and UI variants. |
@@ -106,11 +128,14 @@ From Gmail, apply the label `TrackerPal` to force-import a low-signal message th
 - [Architecture Notes](docs/ARCHITECTURE.md)
 - [Contributing Guide](CONTRIBUTING.md)
 - [Security Policy](SECURITY.md)
+- [Privacy Policy](docs/PRIVACY.md)
+- [Support](docs/SUPPORT.md)
+- [Chrome Web Store Submission](docs/CHROME_WEB_STORE.md)
 - [Changelog](CHANGELOG.md)
 
 ## Privacy
 
-TrackerPal does not send package data to a third-party service. Gmail messages are read by the owner's Apps Script project, parsed inside Apps Script, and stored in the owner's Google Sheet.
+TrackerPal has no analytics, advertising, or developer-owned data service. Extension entries stay in Chrome. Clicking **Track** opens the chosen carrier's website and therefore sends that tracking number to the carrier. Gmail messages used by the optional personal workflow are processed inside the owner's Apps Script project and stored in the owner's Google Sheet.
 
 Keep deployment URLs, secret keys, `.clasp.json`, `.clasprc.json`, and Google project IDs out of commits, issues, screenshots, and public docs.
 
