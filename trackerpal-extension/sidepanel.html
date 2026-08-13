@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TrackerPal</title>
+    <link rel="stylesheet" href="sidepanel.css">
+  </head>
+  <body>
+    <header class="shell-header">
+      <div class="brand">
+        <img src="icons/icon-48.png" alt="">
+        <div>
+          <strong><span>Tracker</span><em>Pal</em></strong>
+          <small>Package control center</small>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="settingsButton" type="button">Settings</button>
+      </div>
+    </header>
+
+    <main>
+      <nav class="view-tabs" aria-label="TrackerPal views">
+        <button class="view-tab active" id="packagesTab" type="button" aria-pressed="true">My packages</button>
+        <button class="view-tab" id="syncedTab" type="button" aria-pressed="false">Gmail + Sheets</button>
+      </nav>
+
+      <section class="packages-view" id="packagesView">
+        <div class="stats" id="stats" aria-label="Package summary"></div>
+
+        <form class="quick-add" id="packageForm">
+          <h1>Add a package</h1>
+          <label for="item">Package name</label>
+          <input id="item" name="item" required maxlength="80" placeholder="Coffee filters">
+          <div class="form-row">
+            <div>
+              <label for="trackingNumber">Tracking number</label>
+              <input id="trackingNumber" name="trackingNumber" required maxlength="40" autocomplete="off" placeholder="1Z…">
+            </div>
+            <div>
+              <label for="carrier">Carrier</label>
+              <select id="carrier" name="carrier">
+                <option value="Auto">Auto detect</option>
+                <option>UPS</option>
+                <option>USPS</option>
+                <option>FedEx</option>
+                <option>DHL</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <button class="primary add-button" type="submit">Add package</button>
+        </form>
+
+        <div class="list-heading">
+          <h2>Deliveries</h2>
+          <div class="list-filters" aria-label="Filter packages">
+            <button class="filter active" type="button" data-filter="open" aria-pressed="true">Open</button>
+            <button class="filter" type="button" data-filter="all" aria-pressed="false">All</button>
+          </div>
+        </div>
+        <div class="package-list" id="packageList"></div>
+        <p class="local-note">Package details stay in Chrome on this device.</p>
+      </section>
+
+      <section class="synced-view" id="syncedView" hidden>
+        <div class="synced-toolbar">
+          <button id="reloadButton" type="button">Refresh</button>
+          <button class="primary" id="openButton" type="button">Open full page</button>
+        </div>
+        <div class="sync-stage">
+          <div class="loading" id="loading" role="status">Connecting securely to TrackerPal…</div>
+          <div class="notice" id="notice" hidden>
+            <strong id="noticeTitle">Connect Gmail + Sheets</strong>
+            <p id="noticeMessage"></p>
+            <div class="notice-actions">
+              <button class="primary" id="noticeOpenButton" type="button">Open and sign in</button>
+              <button id="syncSettingsButton" type="button">Connection settings</button>
+            </div>
+          </div>
+          <iframe id="trackerFrame" title="TrackerPal Gmail and Sheets dashboard" hidden></iframe>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="consent-dialog" id="privacyConsent" aria-labelledby="consentTitle" aria-describedby="consentSummary consentTracking">
+      <div class="consent-brand">
+        <img src="icons/icon-48.png" alt="">
+        <span>Before you start</span>
+      </div>
+      <h2 id="consentTitle">Your package details stay in Chrome</h2>
+      <p id="consentSummary">TrackerPal stores the package name, tracking number, carrier, status, and received state locally in this Chrome profile. TrackerPal does not send that list to our servers.</p>
+      <p id="consentTracking">When you click <strong>Track</strong>, Chrome opens the carrier's website and includes that package's tracking number in the carrier URL.</p>
+      <a class="privacy-link" href="privacy.html" target="_blank" rel="noopener">Read the bundled privacy details</a>
+      <button class="primary consent-button" id="acceptPrivacy" type="button">I understand — continue</button>
+    </dialog>
+
+    <p class="sr-only" id="liveStatus" role="status" aria-live="polite"></p>
+
+    <script src="config.js"></script>
+    <script src="tracking.js"></script>
+    <script src="packages.js"></script>
+    <script src="sidepanel.js"></script>
+  </body>
+</html>

@@ -72,6 +72,16 @@ npm run open
 
 `.clasp.json` is ignored by git because it contains deployment-specific IDs.
 
+## Private desktop configuration
+
+The desktop and bound web-app variants keep deployment-specific values in ignored files so spreadsheet IDs and access keys are never published to GitHub.
+
+- Copy `trackerpal-desktop/PrivateConfig.example.js` to `trackerpal-desktop/src/PrivateConfig.js`.
+- Copy `trackerpal-bound-ui/PrivateConfig.example.js` to `trackerpal-bound-ui/src/PrivateConfig.js` when using that variant.
+- Replace every placeholder with the private values for that deployment.
+
+Never commit either `src/PrivateConfig.js` file. The Store extension does not use or contain these files.
+
 ## Daily Operation
 
 After setup, TrackerPal runs from Apps Script triggers:

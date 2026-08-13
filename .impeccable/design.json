@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-13T05:54:52-04:00",
+  "title": "Design System: TrackerPal",
+  "extensions": {
+    "colorMeta": {
+      "forest-ink": { "role": "neutral", "displayName": "Forest Ink", "canonical": "#10271f", "tonalRamp": ["#06100d", "#10271f", "#214437", "#3e6354", "#668578", "#94a99f", "#c7d3cd", "#eef3f0"] },
+      "muted-sage": { "role": "neutral", "displayName": "Muted Sage", "canonical": "#586d64", "tonalRamp": ["#101814", "#24342d", "#3c5148", "#586d64", "#798c83", "#a2afa9", "#cdd5d1", "#f2f5f3"] },
+      "quiet-line": { "role": "neutral", "displayName": "Quiet Line", "canonical": "#d6e3dc", "tonalRamp": ["#15211b", "#32453b", "#536b5f", "#789287", "#a0b8ac", "#bed0c7", "#d6e3dc", "#f4f8f6"] },
+      "white-surface": { "role": "neutral", "displayName": "White Surface", "canonical": "#ffffff", "tonalRamp": ["#262626", "#4a4a4a", "#707070", "#969696", "#bdbdbd", "#dedede", "#f2f2f2", "#ffffff"] },
+      "soft-surface": { "role": "neutral", "displayName": "Soft Surface", "canonical": "#f3f8f5", "tonalRamp": ["#18221d", "#35483e", "#586f63", "#7f978b", "#a8bdb2", "#ccd9d2", "#e5ede9", "#f3f8f5"] },
+      "ambient-mist": { "role": "neutral", "displayName": "Ambient Mist", "canonical": "#edf5f0", "tonalRamp": ["#17211b", "#34473c", "#576d61", "#7d9588", "#a5baae", "#c8d7cf", "#dfeae4", "#edf5f0"] },
+      "operational-emerald": { "role": "primary", "displayName": "Operational Emerald", "canonical": "#08734b", "tonalRamp": ["#022419", "#04452f", "#06613f", "#08734b", "#169262", "#47ad82", "#8bd0ae", "#e2f5eb"] },
+      "brand-emerald-deep": { "role": "secondary", "displayName": "Deep Brand Emerald", "canonical": "#065f46", "tonalRamp": ["#052e23", "#064e3b", "#065f46", "#08734b", "#10b981", "#6ee7b7", "#d1fae5", "#ecfdf5"] },
+      "brand-emerald-bright": { "role": "secondary", "displayName": "Bright Brand Emerald", "canonical": "#10b981", "tonalRamp": ["#052e23", "#064e3b", "#065f46", "#08734b", "#10b981", "#6ee7b7", "#d1fae5", "#ecfdf5"] },
+      "exception-red": { "role": "tertiary", "displayName": "Exception Red", "canonical": "#b42318", "tonalRamp": ["#310805", "#5d100b", "#861a12", "#b42318", "#cf5148", "#e58982", "#f2bfbb", "#fce8e6"] },
+      "focus-emerald": { "role": "primary", "displayName": "Focus Emerald", "canonical": "#087a55", "tonalRamp": ["#032419", "#054932", "#076746", "#087a55", "#23976d", "#57b38d", "#98d3b9", "#e4f6ee"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Emerald Wordmark", "purpose": "Compact two-tone emerald TrackerPal identity only." },
+      "headline": { "displayName": "Task Headline", "purpose": "Dialog and major task titles." },
+      "metric": { "displayName": "Metric", "purpose": "Tabular operational counts." },
+      "body": { "displayName": "Body", "purpose": "Controls, table values, and form content." },
+      "control": { "displayName": "Control", "purpose": "Primary and secondary button labels." },
+      "filter": { "displayName": "Filter", "purpose": "Main-app filter labels and their active state." },
+      "label": { "displayName": "Operational Label", "purpose": "Uppercase metric, table, and mobile row labels." }
+    },
+    "shadows": [
+      { "name": "control-rest", "value": "0 3px 10px rgba(16, 35, 59, 0.05)", "purpose": "Quiet separation beneath main-app buttons." },
+      { "name": "control-hover", "value": "0 7px 16px rgba(0, 0, 0, 0.1)", "purpose": "Brief hover lift for actionable controls." },
+      { "name": "metric", "value": "0 7px 24px rgba(16, 35, 59, 0.07)", "purpose": "Low ambient separation for main-app summary cards." },
+      { "name": "workspace", "value": "0 18px 45px rgba(16, 39, 31, 0.12)", "purpose": "Separates the primary operational plane." },
+      { "name": "sidepanel-shell", "value": "0 8px 24px rgba(16, 39, 31, 0.08)", "purpose": "Separates the browser side-panel header." },
+      { "name": "sidepanel-card", "value": "0 10px 28px rgba(16, 39, 31, 0.09)", "purpose": "Lifts the browser side-panel task cards." },
+      { "name": "toast", "value": "0 16px 36px rgba(16, 35, 59, 0.22)", "purpose": "Elevates temporary live feedback." }
+    ],
+    "motion": [
+      { "name": "control-response", "value": "140ms ease-out", "purpose": "Button transform, shadow, background, and border feedback." },
+      { "name": "live-feedback", "value": "180ms cubic-bezier(.2,.8,.2,1)", "purpose": "Toast entrance and exit." },
+      { "name": "reduced-motion", "value": "0.01ms", "purpose": "Effectively removes animation when reduced motion is requested." }
+    ],
+    "breakpoints": [
+      { "name": "compact-dashboard", "value": "1080px" },
+      { "name": "base-stack", "value": "860px" },
+      { "name": "mobile-operations", "value": "680px" },
+      { "name": "sidepanel-stack", "value": "380px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Emerald Wordmark",
+      "kind": "custom",
+      "description": "The all-emerald TrackerPal identity, pairing an authoritative deep tone with a bright highlight.",
+      "html": "<div class=\"ds-wordmark\" aria-label=\"TrackerPal\"><span>Tracker</span><em>Pal</em></div>",
+      "css": ".ds-wordmark { display: flex; align-items: baseline; font: 900 31px/.95 Aptos, 'Segoe UI Variable Text', 'Segoe UI', sans-serif; letter-spacing: -.025em; } .ds-wordmark span { color: var(--brand-deep, #065f46); } .ds-wordmark em { color: var(--brand-bright, #10b981); font-style: normal; }"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The decisive emerald action for adding, saving, or retrying.",
+      "html": "<button class=\"ds-btn-primary\">Add Order</button>",
+      "css": ".ds-btn-primary { min-height: 44px; padding: 0 16px; border: 1px solid var(--green, #08734b); border-radius: 12px; background: var(--green, #08734b); color: #fff; font: 750 16px Aptos, 'Segoe UI Variable Text', 'Segoe UI', sans-serif; box-shadow: 0 3px 10px rgba(16,35,59,.05); transition: transform 140ms ease-out, box-shadow 140ms ease-out, background-color 140ms ease-out; } .ds-btn-primary:hover { transform: translateY(-1px); background: #065e3d; border-color: #065e3d; box-shadow: 0 7px 16px rgba(0,0,0,.1); } .ds-btn-primary:active { transform: translateY(0); } .ds-btn-primary:focus-visible { outline: 3px solid var(--focus, #087a55); outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A quiet command for routine operational actions.",
+      "html": "<button class=\"ds-btn-secondary\">Refresh</button>",
+      "css": ".ds-btn-secondary { min-height: 44px; padding: 0 16px; border: 1px solid #c8d9d0; border-radius: 12px; background: #fff; color: var(--ink, #10271f); font: 750 16px Aptos, 'Segoe UI Variable Text', 'Segoe UI', sans-serif; box-shadow: 0 3px 10px rgba(16,35,59,.05); transition: transform 140ms ease-out, box-shadow 140ms ease-out, border-color 140ms ease-out; } .ds-btn-secondary:hover { transform: translateY(-1px); border-color: #93b7a4; box-shadow: 0 7px 16px rgba(0,0,0,.1); } .ds-btn-secondary:active { transform: translateY(0); } .ds-btn-secondary:focus-visible { outline: 3px solid var(--focus, #087a55); outline-offset: 2px; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "The full-width entry point for narrowing orders.",
+      "html": "<input class=\"ds-input-search\" type=\"search\" aria-label=\"Search orders\" placeholder=\"Search orders, stores, or tracking numbers\">",
+      "css": ".ds-input-search { width: 100%; min-height: 46px; padding: 0 15px; border: 1px solid var(--line, #d6e3dc); border-radius: 12px; background: var(--soft, #f3f8f5); color: var(--ink, #10271f); font: 400 16px Aptos, 'Segoe UI Variable Text', 'Segoe UI', sans-serif; } .ds-input-search::placeholder { color: var(--muted, #586d64); opacity: 1; } .ds-input-search:focus-visible { outline: 3px solid var(--focus, #087a55); outline-offset: 2px; }"
+    },
+    {
+      "name": "Active Filter",
+      "kind": "chip",
+      "refersTo": "filter-active",
+      "description": "A pressed filter with emerald selection feedback.",
+      "html": "<button class=\"ds-filter-active\" aria-pressed=\"true\">Due Today</button>",
+      "css": ".ds-filter-active { min-height: 44px; padding: 0 13px; border: 1px solid #84c8a6; border-radius: 999px; background: #ddf3e7; color: #075f3e; font: 700 16px Aptos, 'Segoe UI Variable Text', 'Segoe UI', sans-serif; } .ds-filter-active:focus-visible { outline: 3px solid var(--focus, #087a55); outline-offset: 2px; }"
+    },
+    {
+      "name": "Status Metric",
+      "kind": "card",
+      "description": "A scan-first count with a semantic baseline.",
+      "html": "<div class=\"ds-stat\"><strong>3</strong><span>Due Today</span></div>",
+      "css": ".ds-stat { position: relative; min-height: 94px; padding: 18px; overflow: hidden; border-radius: 14px; background: #fff; color: var(--ink, #10271f); box-shadow: 0 7px 24px rgba(16,39,31,.07); font-family: Aptos, 'Segoe UI Variable Text', 'Segoe UI', sans-serif; } .ds-stat::after { content: ''; position: absolute; inset: auto 0 0; height: 4px; background: #10b981; } .ds-stat strong { display: block; margin-bottom: 6px; font-size: 30px; line-height: 1; letter-spacing: -.035em; font-variant-numeric: tabular-nums; } .ds-stat span { color: var(--muted, #586d64); font-size: 12px; font-weight: 720; letter-spacing: .045em; text-transform: uppercase; }"
+    },
+    {
+      "name": "Exception Signal",
+      "kind": "chip",
+      "description": "An explicit semantic pill for an order requiring attention.",
+      "html": "<span class=\"ds-signal-exception\">Exception</span>",
+      "css": ".ds-signal-exception { display: inline-flex; align-items: center; min-height: 26px; padding: 0 9px; border-radius: 999px; background: #fce8e6; color: var(--red, #b42318); font: 700 12px Aptos, 'Segoe UI Variable Text', 'Segoe UI', sans-serif; }"
+    },
+    {
+      "name": "Workspace",
+      "kind": "card",
+      "refersTo": "workspace",
+      "description": "The white operational plane that owns filtering and order data.",
+      "html": "<section class=\"ds-workspace\"><div class=\"ds-workspace-toolbar\">Orders</div><div class=\"ds-workspace-row\">Package status</div></section>",
+      "css": ".ds-workspace { overflow: hidden; border-radius: 16px; background: #fff; color: var(--ink, #10271f); box-shadow: 0 18px 45px rgba(16,39,31,.12); font-family: Aptos, 'Segoe UI Variable Text', 'Segoe UI', sans-serif; } .ds-workspace-toolbar { padding: 16px 18px; border-bottom: 1px solid var(--line, #d6e3dc); font-weight: 750; } .ds-workspace-row { padding: 15px 18px; } .ds-workspace-row:hover { background: #f5faf7; } .ds-workspace:focus-within { outline: 3px solid var(--focus, #087a55); outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Emerald Dispatch Console",
+    "overview": "TrackerPal is a modern, focused operations surface: calm enough for repeated daily use, but decisive when a package needs attention. A light green ambient scene and forest-ink information frame keep the console crisp; operational emerald carries actions, focus, links, selection, due-today cues, and healthy state.\n\nThe visual identity is entirely emerald. The wordmark and brand icon use deep and bright emerald together, while metrics, filters, table signals, and form controls form a compact scan-and-act rhythm. Red remains strictly semantic for overdue, exception, destructive, and error states; all routine and positive signals stay green or neutral.",
+    "keyCharacteristics": [
+      "Emerald-led hierarchy across branding, actions, focus, links, and successful state.",
+      "Forest-tinted text, white work surfaces, and pale green ambient backgrounds.",
+      "Deep and bright emerald form the TrackerPal wordmark and icon signature.",
+      "Compact status density with generous 44px interaction targets.",
+      "Responsive data presentation that becomes labeled rows on small screens."
+    ],
+    "rules": [
+      { "name": "The Emerald Continuity Rule", "body": "Brand marks, primary actions, focus rings, links, selected states, and success feedback stay within the emerald family.", "section": "colors" },
+      { "name": "The Status Has Meaning Rule", "body": "Bright and muted emerald distinguish routine status; red is reserved for exceptions and errors. Color always supplements explicit text.", "section": "colors" },
+      { "name": "The One Brand Family Rule", "body": "Do not introduce a separate accent family into the wordmark, icon, or routine interface controls.", "section": "colors" },
+      { "name": "The Scan Before Flourish Rule", "body": "Prefer weight, alignment, and tabular figures over ornamental typography.", "section": "typography" },
+      { "name": "The Data Reflows Rule", "body": "Never preserve a desktop-width table by forcing horizontal page scrolling on mobile; convert columns into explicit labeled rows.", "section": "layout" },
+      { "name": "The Neutral Elevation Rule", "body": "Shadows use translucent deep ink or black; emerald communicates state through fills, strokes, and type rather than cast light.", "section": "elevation" },
+      { "name": "The Radius Follows Scale Rule", "body": "Larger containers receive larger corners; do not give every element the same generic radius.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do keep branding and routine interaction entirely within the deep-to-bright emerald family.",
+      "Do use deep and bright emerald together for the TrackerPal wordmark and icon signature.",
+      "Do make status the first scanning cue through explicit labels, ordering, and restrained semantic color.",
+      "Do keep primary main-app controls at least 44px tall and retain the visible emerald focus treatment.",
+      "Do preserve labeled-row mobile behavior, modal focus management, live regions, and HTTP(S)-only tracking links."
+    ],
+    "donts": [
+      "Don't reintroduce a non-emerald split-color treatment into TrackerPal branding.",
+      "Don't use red as decoration or as a routine accent; it communicates overdue, exception, destructive, and error states only.",
+      "Don't add glassy, colored, or theatrical shadows; elevation stays neutral and operational.",
+      "Don't compress dense controls below their source-defined touch targets or hide state behind color alone.",
+      "Don't allow untrusted tracking protocols or remove the dialog, focus, reduced-motion, and live-feedback safeguards."
+    ]
+  }
+}

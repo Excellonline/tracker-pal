@@ -1,0 +1,15 @@
+:root { color-scheme: light; --ink: #10271f; --muted: #586d64; --green: #08734b; --line: #c9ded2; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; padding: 32px 20px; color: var(--ink); background: radial-gradient(circle at 10% 0%, #d1fae5, transparent 360px), #f3f8f5; font-family: Aptos, "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; }
+main { width: min(720px, 100%); margin: 0 auto; padding: clamp(26px, 5vw, 48px); border: 1px solid var(--line); border-radius: 22px; background: #fff; box-shadow: 0 20px 60px rgba(16, 39, 31, 0.12); }
+.brand { display: flex; align-items: center; gap: 12px; color: var(--green); font-weight: 850; }
+.brand img { width: 52px; height: 52px; }
+h1 { margin: 24px 0 14px; max-width: 18ch; font-size: clamp(30px, 6vw, 48px); line-height: 1.02; letter-spacing: -0.05em; }
+h2 { margin: 30px 0 8px; font-size: 19px; letter-spacing: -0.02em; }
+p { color: var(--muted); line-height: 1.65; }
+code { color: var(--green); font-weight: 700; }
+.delete-data { min-height: 46px; padding: 0 16px; border: 1px solid #e3aaa5; border-radius: 11px; background: #fff4f2; color: #b42318; font: inherit; font-weight: 750; cursor: pointer; }
+.delete-data:hover { border-color: #b42318; }
+.delete-data:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+.delete-status { min-height: 24px; color: var(--green); font-weight: 750; }
+.effective { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; }

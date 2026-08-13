@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TrackerPal settings</title>
+    <link rel="stylesheet" href="options.css">
+  </head>
+  <body>
+    <main>
+      <img src="icons/icon-128.png" alt="">
+      <h1>TrackerPal settings</h1>
+      <p>Local package tracking works immediately. Optionally connect your own private Google Apps Script deployment for Gmail and Sheets sync.</p>
+      <label for="trackerUrl">Apps Script web app URL</label>
+      <input id="trackerUrl" type="url" spellcheck="false" placeholder="https://script.google.com/macros/s/…/exec">
+      <div class="actions">
+        <button id="saveButton" type="button">Save connection</button>
+        <button class="secondary" id="clearButton" type="button">Disconnect</button>
+        <span id="status" role="status" aria-live="polite"></span>
+      </div>
+    </main>
+    <script src="config.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>
