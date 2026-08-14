@@ -1,6 +1,6 @@
 {
   "name": "trackerpal",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "private": true,
   "description": "TrackerPal package tracking for Chrome, with an optional private Gmail and Google Sheets workflow.",
   "keywords": [

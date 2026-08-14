@@ -40,7 +40,7 @@
       .panel-body { padding: 12px; }
 
       .stats { height: 68px; display: grid; grid-template-columns: repeat(3,1fr); overflow: hidden; border-radius: 14px; background: #052e23; box-shadow: 0 12px 26px rgba(0,0,0,.16); }
-      .stat { position: relative; padding: 14px 12px 13px; }
+      .stat { position: relative; padding: 14px 12px 13px; text-align: center; }
       .stat + .stat::before { content: ""; position: absolute; inset: 13px auto 13px 0; width: 1px; background: rgba(209,250,229,.2); }
       .stat b { display: block; color: #fff; font-size: 23px; line-height: 1; }
       .stat span { display: block; margin-top: 6px; color: #a7f3d0; font-size: 9px; font-weight: 780; letter-spacing: .075em; text-transform: uppercase; }
@@ -73,11 +73,14 @@
       .package small { min-width: 0; flex: 1; display: block; overflow: hidden; color: #52685e; text-overflow: ellipsis; white-space: nowrap; font-size: 9px; }
       .date { height: 20px; display: flex; align-items: center; flex: 0 0 auto; padding: 0 6px; border: 1px solid #d4e2da; border-radius: 99px; color: #3d574b; background: #f6faf8; font-size: 7px; font-weight: 720; }
       .package-tools { flex: 0 0 auto; display: flex; align-items: center; gap: 5px; margin-left: auto; }
-      .status { width: 88px; height: 32px; display: flex; align-items: center; justify-content: center; padding: 0 8px; border: 1px solid #efc1bc; border-radius: 99px; color: #b42318; background: #fff1f0; font-size: 8px; font-weight: 800; letter-spacing: .02em; text-transform: uppercase; }
+      .status { width: 72px; height: 32px; display: flex; align-items: center; justify-content: center; padding: 0 6px; border: 1px solid #efc1bc; border-radius: 99px; color: #b42318; background: #fff1f0; font-size: 8px; font-weight: 800; letter-spacing: .02em; text-align: center; text-transform: uppercase; }
+      .status.short { width: 66px; }
+      .status.long { width: 76px; }
       .compact { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid #b9cfc3; border-radius: 9px; color: #065f46; background: #ecfdf5; }
       .compact.delete { color: #b42318; background: #fff; }
       .compact svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
       .carrier { height: 28px; display: flex; align-items: center; gap: 3px; flex: 0 0 auto; padding: 0 7px; border-radius: 99px; color: #065f46; background: #d1fae5; font-size: 8px; font-weight: 800; text-transform: uppercase; }
+      .carrier.static { min-width: 44px; padding-inline: 6px; letter-spacing: 0; justify-content: center; text-align: center; }
       .carrier i { width: 6px; height: 6px; border-top: 1.4px solid currentColor; border-right: 1.4px solid currentColor; }
       .export { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 5px 10px; padding: 9px 12px; border-top: 1px solid #d9e8e0; background: #f1f8f4; }
       .export-copy b, .export-copy small { display: block; }
@@ -135,15 +138,15 @@
               </div>
               <article class="package">
                 <span class="marker"></span>
-                <div class="package-main"><div class="package-mainline"><span class="package-title"><b>Standing desk</b></span><span class="status">Out today</span><span class="package-tools"><span class="compact"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span><span class="compact delete"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5"/></svg></span><span class="carrier">UPS<i></i></span></span></div><span class="package-meta"><small>1Z999AA10123456784</small><span class="date">Aug 13, 2026</span></span></div>
+                <div class="package-main"><div class="package-mainline"><span class="package-title"><b>Standing desk</b></span><span class="status long">Out today</span><span class="package-tools"><span class="carrier">UPS<i></i></span><span class="compact"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span><span class="compact delete"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5"/></svg></span></span></div><span class="package-meta"><small>1Z999AA10123456784</small><span class="date">Aug 13, 2026</span></span></div>
               </article>
               <article class="package shipped">
                 <span class="marker"></span>
-                <div class="package-main"><div class="package-mainline"><span class="package-title"><b>Coffee subscription</b></span><span class="status">Shipped</span><span class="package-tools"><span class="compact"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span><span class="compact delete"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5"/></svg></span><span class="carrier">USPS<i></i></span></span></div><span class="package-meta"><small>9400111899223856928499</small><span class="date">Aug 12, 2026</span></span></div>
+                <div class="package-main"><div class="package-mainline"><span class="package-title"><b>Coffee subscription</b></span><span class="status short">Shipped</span><span class="package-tools"><span class="carrier">USPS<i></i></span><span class="compact"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span><span class="compact delete"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5"/></svg></span></span></div><span class="package-meta"><small>9400111899223856928499</small><span class="date">Aug 12, 2026</span></span></div>
               </article>
               <article class="package ordered">
                 <span class="marker"></span>
-                <div class="package-main"><div class="package-mainline"><span class="package-title"><b>Market pickup</b></span><span class="status">Ordered</span><span class="package-tools"><span class="compact"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span><span class="compact delete"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5"/></svg></span><span class="carrier">Pickup</span></span></div><span class="package-meta"><small>Pickup location not added</small><span class="date">Aug 10, 2026</span></span></div>
+                <div class="package-main"><div class="package-mainline"><span class="package-title"><b>Market pickup</b></span><span class="status short">Ordered</span><span class="package-tools"><span class="carrier static">Pickup</span><span class="compact"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span><span class="compact delete"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5"/></svg></span></span></div><span class="package-meta"><small>Pickup location not added</small><span class="date">Aug 10, 2026</span></span></div>
               </article>
               <div class="export">
                 <span class="export-copy"><b>Completed history</b><small>4 received packages ready</small></span>

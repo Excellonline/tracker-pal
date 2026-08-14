@@ -130,15 +130,15 @@
         <div class="package-content">
           <div class="package-mainline">
             <div class="package-title"><strong title="${item}">${item}</strong></div>
-            <div class="status-control">
+            <div class="status-control ${statusClass(entry.status)}">
               <select data-action="status" aria-label="Change status for ${item}" title="Change status">
                 ${statuses.map((status) => `<option value="${status}" ${status === entry.status ? "selected" : ""}>${statusLabel(status)}</option>`).join("")}
               </select>
             </div>
             <div class="package-toolbar">
+              ${url ? `<button class="carrier-pill carrier-track" type="button" data-action="track" data-url="${escapeHtml(url)}" aria-label="Track ${item} with ${escapeHtml(entry.carrier)}" title="Track with ${escapeHtml(entry.carrier)}"><span>${escapeHtml(entry.carrier)}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 16 16 8m-6 0h6v6"/></svg></button>` : `<span class="carrier-pill carrier-static">${escapeHtml(entry.carrier)}</span>`}
               <button class="compact-action received-button ${entry.received ? "done" : ""}" type="button" data-action="received" aria-label="${entry.received ? "Reopen" : "Mark"} ${item}${entry.received ? "" : " received"}" aria-pressed="${entry.received}" title="${entry.received ? "Reopen package" : "Mark received"}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></button>
               <button class="compact-action delete-button" type="button" data-action="delete" aria-label="Delete ${item}" title="Delete package"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5"/></svg></button>
-              ${url ? `<button class="carrier-pill carrier-track" type="button" data-action="track" data-url="${escapeHtml(url)}" aria-label="Track ${item} with ${escapeHtml(entry.carrier)}" title="Track with ${escapeHtml(entry.carrier)}"><span>${escapeHtml(entry.carrier)}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 16 16 8m-6 0h6v6"/></svg></button>` : `<span class="carrier-pill">${escapeHtml(entry.carrier)}</span>`}
             </div>
           </div>
           <div class="package-meta">

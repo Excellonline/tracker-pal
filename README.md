@@ -87,6 +87,8 @@ In the Apps Script editor, run these functions in order:
 
 Google will ask for Gmail, Sheets, trigger, and email-send permissions during first setup. Because TrackerPal is a private Apps Script app rather than a published Marketplace app, Google may show an unverified-app warning for the owner account.
 
+If that permission screen appears inside TrackerPal's side panel, use **Open & approve** to finish the Google review in a full Chrome tab, return to TrackerPal, and click **Refresh**.
+
 ## Project Layout
 
 | Path | Purpose |

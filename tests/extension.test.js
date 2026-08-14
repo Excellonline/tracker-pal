@@ -39,6 +39,7 @@ assert.doesNotMatch(storeMarkup, /<iframe\b|script\.google\.com|googleuserconten
 assert.match(storeMarkup, /privacyConsent/, "Store UI requires first-run privacy consent");
 assert.match(storeMarkup, /tracking number in the carrier URL/i, "Store UI discloses carrier transfer before use");
 const personalMarkup = fs.readFileSync(path.join(root, "sidepanel.html"), "utf8");
+assert.match(personalMarkup, /id="openButton"[^>]+aria-label="Open TrackerPal in a full tab to review Google permissions"[^>]*>Open &amp; approve<\/button>/, "personal Gmail view provides a clear full-tab permission path");
 for (const [name, markup] of [["personal", personalMarkup], ["Store", storeMarkup]]) {
   assert.match(markup, /<html lang="en">/, `${name} side panel declares its language`);
   assert.match(markup, /name="viewport"/, `${name} side panel declares a mobile viewport`);
@@ -61,11 +62,13 @@ assert.match(packagesSource, /privacyConsentVersion/, "consent choice is persist
 assert.match(packagesSource, /chrome\.storage\.local/, "package data is stored locally");
 assert.match(packagesSource, /role="listitem"/, "rendered deliveries expose list-item semantics");
 assert.match(packagesSource, /event\.target\.closest\("\[data-action\]"\)/, "nested delivery button icons keep delegated actions working");
-assert.match(packagesSource, /class="status-control"/, "delivery status uses a compact editable control");
+assert.match(packagesSource, /class="status-control \$\{statusClass\(entry\.status\)\}"/, "delivery status uses a state-sized editable control");
 assert.doesNotMatch(packagesSource, /class="status-edit"/, "status stays clean without a redundant pencil icon");
-assert.match(packagesSource, /package-title[^`]+<\/div>\s*<div class="status-control">/, "status pill follows and visually hugs the package title");
+assert.match(packagesSource, /package-title[^`]+<\/div>\s*<div class="status-control \$\{statusClass\(entry\.status\)\}">/, "status pill follows and visually hugs the package title");
 assert.match(packagesSource, /class="compact-action received-button/, "received actions stay compact in dense lists");
 assert.match(packagesSource, /class="compact-action delete-button/, "delete actions stay compact in dense lists");
+assert.match(packagesSource, /class="carrier-pill carrier-static"/, "text-only carrier pills use dedicated optical centering");
+assert.ok(packagesSource.indexOf('class="carrier-pill carrier-track"') < packagesSource.indexOf('class="compact-action received-button'), "carrier appears before receive and delete controls in each action group");
 assert.match(packagesSource, /aria-label="Track \$\{item\} with/, "carrier tracking buttons name their package and carrier");
 assert.match(packagesSource, /pickup \? "Address \(optional\)" : "Tracking number"/, "Pickup relabels the tracking field as an optional address");
 assert.match(packagesSource, /trackingInput\.required = !pickup/, "Pickup makes the address optional while shipped packages still require tracking numbers");
@@ -89,14 +92,20 @@ for (const [name, cssPath] of [["personal", path.join(root, "sidepanel.css")], [
   assert.match(css, /\.package-row\s*\{/, `${name} renders deliveries as a clean row list`);
   assert.match(css, /grid-template-columns:\s*4px minmax\(0, 1fr\)/, `${name} keeps delivery details in a compact connected row`);
   assert.match(css, /\.status-control select\s*\{[\s\S]*?border-radius:\s*999px[\s\S]*?color:\s*var\(--danger\)/, `${name} renders status as a red editable pill`);
-  assert.match(css, /\.package-toolbar\s*\{[^}]*margin-left:\s*auto/, `${name} keeps receive, delete, and carrier actions aligned at the right edge`);
+  assert.match(css, /\.status-control\.status-ordered[^}]*width:\s*66px/, `${name} removes excess padding from short status pills`);
+  assert.match(css, /\.status-control select\s*\{[^}]*text-align:\s*center;[^}]*text-align-last:\s*center/, `${name} centers native status text consistently`);
+  assert.match(css, /\.package-toolbar\s*\{[^}]*margin-left:\s*auto/, `${name} keeps carrier, receive, and delete actions aligned at the right edge`);
   assert.match(css, /\.compact-action\s*\{[\s\S]*?width:\s*32px[\s\S]*?height:\s*32px/, `${name} uses tidy icon actions for dense delivery lists`);
   assert.match(css, /button\.carrier-pill/, `${name} makes the compact carrier pill the tracking action`);
+  assert.match(css, /\.carrier-static\s*\{[^}]*letter-spacing:\s*0;[^}]*text-align:\s*center/, `${name} optically centers text-only carrier pills`);
+  assert.match(css, /\.stat\s*\{[^}]*text-align:\s*center/, `${name} centers every summary value and label in its column`);
   assert.match(css, /\.entry-date\s*\{/, `${name} presents the editable entry date as a compact row control`);
   assert.match(css, /\.entry-date:focus-within/, `${name} keeps the invisible native date input visibly focusable`);
   assert.match(css, /\.history-export\s*\{/, `${name} styles completed-history downloads as a distinct footer`);
   assert.match(css, /\.history-export\[hidden\]\s*\{\s*display:\s*none/, `${name} removes hidden export controls from the layout`);
   assert.match(css, /\.history-export-actions button\s*\{[^}]*min-height:\s*44px/, `${name} keeps export downloads easy to click`);
+  assert.match(css, /\.loading\s*\{[^}]*pointer-events:\s*none/, `${name} loading text cannot block embedded controls`);
+  assert.match(css, /\.loading\[hidden\]\s*\{\s*display:\s*none/, `${name} fully removes the finished loading layer`);
   assert.match(css, /:focus-visible/, `${name} preserves visible keyboard focus`);
   assert.match(css, /@media \(max-width: 390px\)/, `${name} adapts delivery rows for narrow side panels`);
   assert.match(css, /prefers-reduced-motion/, `${name} honors reduced-motion preferences`);

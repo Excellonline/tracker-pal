@@ -2,6 +2,13 @@
 
 All notable changes to TrackerPal will be documented in this file.
 
+## 0.4.3 - 2026-08-13
+
+- Centered summary values and labels within their three equal-width columns.
+- Centered text-only carrier pills and tightened short status pills so labels no longer sit against excess right padding.
+- Reordered dense delivery actions to carrier, Receive, then Delete for a cleaner right-edge group.
+- Fixed the hidden Gmail loading layer so it cannot cover Google's permission controls, and clarified the full-tab approval path.
+
 ## 0.4.2 - 2026-08-13
 
 - Removed redundant pencil icons from the clickable status and entry-date controls.

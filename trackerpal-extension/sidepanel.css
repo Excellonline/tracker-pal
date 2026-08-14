@@ -93,7 +93,7 @@ main { min-height: calc(100vh - 70px); }
   background: var(--green-950);
   box-shadow: 0 12px 26px rgba(0, 0, 0, .16);
 }
-.stat { position: relative; min-width: 0; padding: 14px 12px 13px; }
+.stat { position: relative; min-width: 0; padding: 14px 12px 13px; text-align: center; }
 .stat + .stat::before { content: ""; position: absolute; inset: 13px auto 13px 0; width: 1px; background: rgba(209, 250, 229, .2); }
 .stat strong { display: block; color: #fff; font-size: 23px; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -.025em; }
 .stat span { display: block; margin-top: 6px; color: var(--green-200); font-size: 9px; font-weight: 780; letter-spacing: .075em; text-transform: uppercase; }
@@ -191,7 +191,9 @@ main { min-height: calc(100vh - 70px); }
 .entry-date-display { display: inline-flex; align-items: center; padding: 0 7px; font-size: 8px; font-weight: 720; white-space: nowrap; }
 .entry-date-display time { font-variant-numeric: tabular-nums; }
 .package-toolbar { flex: 0 0 auto; display: flex; align-items: center; gap: 5px; margin-left: auto; }
-.status-control { position: relative; width: 88px; flex: 0 0 88px; color: var(--danger); }
+.status-control { position: relative; width: 72px; flex: 0 0 72px; color: var(--danger); }
+.status-control.status-ordered, .status-control.status-shipped { width: 66px; flex-basis: 66px; }
+.status-control.status-out-for-delivery { width: 76px; flex-basis: 76px; }
 .status-control select {
   width: 100%;
   height: 32px;
@@ -199,12 +201,14 @@ main { min-height: calc(100vh - 70px); }
   appearance: none;
   border: 1px solid #efc1bc;
   border-radius: 999px;
-  padding: 0 10px;
+  padding: 0 6px;
   color: var(--danger);
   background: var(--danger-soft);
   font-size: 9px;
   font-weight: 800;
   letter-spacing: .025em;
+  text-align: center;
+  text-align-last: center;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -216,6 +220,7 @@ main { min-height: calc(100vh - 70px); }
 .delete-button { color: var(--danger); background: #fff; }
 .delete-button:hover { border-color: #e2aaa5; color: #8f1b13; background: var(--danger-soft); }
 .carrier-pill { min-height: 28px; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: 3px; border-radius: 999px; padding: 0 7px; color: var(--green-800); background: var(--green-100); font-size: 9px; font-weight: 800; letter-spacing: .035em; text-transform: uppercase; }
+.carrier-static { min-width: 44px; padding-inline: 6px; letter-spacing: 0; line-height: 1; text-align: center; }
 button.carrier-pill { min-height: 28px; border-color: transparent; box-shadow: none; }
 button.carrier-pill:hover { border-color: #91c7aa; background: #bdf4d8; transform: none; }
 .carrier-pill svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
@@ -275,7 +280,8 @@ button.carrier-pill:hover { border-color: #91c7aa; background: #bdf4d8; transfor
 .sync-stage { position: relative; min-height: calc(100vh - 194px); }
 iframe { width: 100%; height: calc(100vh - 194px); border: 0; background: #f8faf9; }
 .loading, .notice { position: absolute; inset: 0; place-content: center; text-align: center; padding: 28px; }
-.loading { display: grid; color: var(--muted); }
+.loading { display: grid; color: var(--muted); pointer-events: none; }
+.loading[hidden] { display: none; }
 .notice { background: #f8faf9; }
 .notice:not([hidden]) { display: grid; }
 .notice strong { font-size: 20px; }
@@ -289,8 +295,7 @@ iframe { width: 100%; height: calc(100vh - 194px); border: 0; background: #f8faf
   .package-row { gap: 9px; padding-inline: 10px; }
   .package-mainline { gap: 6px; }
   .package-toolbar { gap: 4px; }
-  .status-control { width: 82px; flex-basis: 82px; }
-  .status-control select { padding-inline: 8px; font-size: 8px; }
+  .status-control select { padding-inline: 5px; font-size: 8px; }
   .compact-action { width: 30px; min-width: 30px; height: 30px; min-height: 30px; }
   .carrier-pill { padding-inline: 6px; }
   .package-meta { gap: 5px; }

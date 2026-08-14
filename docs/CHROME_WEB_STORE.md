@@ -83,7 +83,7 @@ Run `npm run build:store`. The resulting ZIP contains only the native side-panel
 
 ## Upload assets
 
-- Package: `dist/trackerpal-chrome-store-v0.4.2.zip`
+- Package: `dist/trackerpal-chrome-store-v0.4.3.zip`
 - Store icon: `store-assets/icon-128x128.png`
 - Screenshot: `store-assets/screenshot-01-side-panel-1280x800.png`
 - Small promotional tile: `store-assets/promo-small-440x280.png`
