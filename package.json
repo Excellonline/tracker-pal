@@ -1,6 +1,6 @@
 {
   "name": "trackerpal",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "private": true,
   "description": "TrackerPal package tracking for Chrome, with an optional private Gmail and Google Sheets workflow.",
   "keywords": [
@@ -24,7 +24,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "test": "node tests/manifest.test.js && node tests/parser.test.js && node tests/gmail.test.js && node tests/summary.test.js && node tests/apps-script-smoke.test.js && node tests/sheets.test.js && node tests/ui.test.js && node tests/extension.test.js && node tests/secrets.test.js",
+    "test": "node tests/manifest.test.js && node tests/parser.test.js && node tests/gmail.test.js && node tests/summary.test.js && node tests/apps-script-smoke.test.js && node tests/sheets.test.js && node tests/ui.test.js && node tests/exports.test.js && node tests/extension.test.js && node tests/secrets.test.js",
     "build:extension": "node scripts/build-extension.js",
     "build:store": "node scripts/build-store-extension.js",
     "clasp": "clasp",

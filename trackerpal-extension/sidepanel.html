@@ -77,6 +77,23 @@
             </div>
           </div>
           <div class="package-list" id="packageList" role="list"></div>
+          <section class="history-export" id="historyExport" aria-labelledby="historyExportTitle" hidden>
+            <div class="history-export-copy">
+              <strong id="historyExportTitle">Completed history</strong>
+              <span id="historyExportSummary">No received packages to download</span>
+            </div>
+            <div class="history-export-actions" aria-label="Download completed shipment history">
+              <button type="button" data-export="csv" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"/></svg>
+                CSV
+              </button>
+              <button type="button" data-export="pdf" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7zM14 3v5h5M9.5 14.5h5M9.5 17.5h3.5"/></svg>
+                PDF
+              </button>
+            </div>
+            <small>Downloads include received package details and stay on your device.</small>
+          </section>
           <footer class="local-note">
             <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2M6 10h12v10H6z"/></svg>Package details stay in Chrome on this device.</span>
             <small>Designed by Sev</small>
@@ -120,6 +137,7 @@
 
     <script src="config.js"></script>
     <script src="tracking.js"></script>
+    <script src="exports.js"></script>
     <script src="packages.js"></script>
     <script src="sidepanel.js"></script>
   </body>

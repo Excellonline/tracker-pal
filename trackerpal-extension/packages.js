@@ -13,6 +13,9 @@
   const trackingFieldLabel = document.getElementById("trackingFieldLabel");
   const carrierSelect = document.getElementById("carrier");
   const liveStatus = document.getElementById("liveStatus");
+  const historyExport = document.getElementById("historyExport");
+  const historyExportSummary = document.getElementById("historyExportSummary");
+  const historyExportButtons = Array.from(document.querySelectorAll("[data-export]"));
   const consentDialog = document.getElementById("privacyConsent");
   const acceptPrivacy = document.getElementById("acceptPrivacy");
   let packages = [];
@@ -84,6 +87,15 @@
     trackingInput.autocomplete = pickup ? "street-address" : "off";
   }
 
+  function syncHistoryExport() {
+    const completedCount = TrackerPalExports.completedEntries(packages).length;
+    historyExport.hidden = activeFilter !== "all";
+    historyExportSummary.textContent = completedCount
+      ? `${completedCount} received ${completedCount === 1 ? "package" : "packages"} ready to download`
+      : "No received packages to download";
+    historyExportButtons.forEach((button) => { button.disabled = completedCount === 0; });
+  }
+
   function renderPackages() {
     sortPackagesByEntryDate();
     const open = packages.filter((entry) => !entry.received).length;
@@ -98,6 +110,7 @@
       const label = activeFilter === "all" ? "saved" : "open";
       deliverySummary.textContent = `${visible.length} ${label} ${visible.length === 1 ? "package" : "packages"}`;
     }
+    syncHistoryExport();
     if (!visible.length) {
       packageList.innerHTML = `<div class="empty">
         <span class="empty-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4.5 8 7.5-4 7.5 4v8L12 20l-7.5-4V8Z"/><path d="m4.5 8 7.5 4 7.5-4M12 12v8"/></svg></span>
@@ -117,13 +130,12 @@
         <div class="package-content">
           <div class="package-mainline">
             <div class="package-title"><strong title="${item}">${item}</strong></div>
+            <div class="status-control">
+              <select data-action="status" aria-label="Change status for ${item}" title="Change status">
+                ${statuses.map((status) => `<option value="${status}" ${status === entry.status ? "selected" : ""}>${statusLabel(status)}</option>`).join("")}
+              </select>
+            </div>
             <div class="package-toolbar">
-              <div class="status-control">
-                <select data-action="status" aria-label="Change status for ${item}" title="Change status">
-                  ${statuses.map((status) => `<option value="${status}" ${status === entry.status ? "selected" : ""}>${statusLabel(status)}</option>`).join("")}
-                </select>
-                <svg class="status-edit" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 16.5-.8 4.3 4.3-.8L19 8.5 15.5 5 4 16.5Z"/><path d="m13.8 6.7 3.5 3.5"/></svg>
-              </div>
               <button class="compact-action received-button ${entry.received ? "done" : ""}" type="button" data-action="received" aria-label="${entry.received ? "Reopen" : "Mark"} ${item}${entry.received ? "" : " received"}" aria-pressed="${entry.received}" title="${entry.received ? "Reopen package" : "Mark received"}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></button>
               <button class="compact-action delete-button" type="button" data-action="delete" aria-label="Delete ${item}" title="Delete package"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5"/></svg></button>
               ${url ? `<button class="carrier-pill carrier-track" type="button" data-action="track" data-url="${escapeHtml(url)}" aria-label="Track ${item} with ${escapeHtml(entry.carrier)}" title="Track with ${escapeHtml(entry.carrier)}"><span>${escapeHtml(entry.carrier)}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 16 16 8m-6 0h6v6"/></svg></button>` : `<span class="carrier-pill">${escapeHtml(entry.carrier)}</span>`}
@@ -134,7 +146,7 @@
             <label class="entry-date" title="Edit entry date">
               <span class="sr-only">Edit entry date for ${item}</span>
               <input type="date" data-action="date" value="${dateValue}" aria-label="Edit entry date for ${item}" title="Edit entry date">
-              <span class="entry-date-display" aria-hidden="true"><time datetime="${dateValue}">${dateLabel}</time><svg viewBox="0 0 24 24"><path d="m4 16.5-.8 4.3 4.3-.8L19 8.5 15.5 5 4 16.5Z"/><path d="m13.8 6.7 3.5 3.5"/></svg></span>
+              <span class="entry-date-display" aria-hidden="true"><time datetime="${dateValue}">${dateLabel}</time></span>
             </label>
           </div>
         </div>
@@ -194,6 +206,8 @@
       let message = "";
       if (action === "received") {
         packages[index].received = !packages[index].received;
+        if (packages[index].received) packages[index].receivedAt = new Date().toISOString();
+        else delete packages[index].receivedAt;
         message = packages[index].received ? `${packages[index].item} marked received.` : `${packages[index].item} reopened.`;
       }
       if (action === "delete") {
@@ -240,6 +254,21 @@
       });
       renderPackages();
     }));
+
+    historyExport.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-export]");
+      if (!button || button.disabled || !historyExport.contains(button)) return;
+      const format = button.dataset.export;
+      try {
+        if (format === "csv") TrackerPalExports.downloadCsv(packages);
+        if (format === "pdf") TrackerPalExports.downloadPdf(packages);
+        liveStatus.textContent = "";
+        requestAnimationFrame(() => { liveStatus.textContent = `${format.toUpperCase()} download started.`; });
+      } catch (error) {
+        console.error("TrackerPal history export failed", error);
+        liveStatus.textContent = "History download failed. Please try again.";
+      }
+    });
   }
 
   function loadPackageData() {

@@ -2,6 +2,13 @@
 
 All notable changes to TrackerPal will be documented in this file.
 
+## 0.4.2 - 2026-08-13
+
+- Removed redundant pencil icons from the clickable status and entry-date controls.
+- Moved each red status pill beside its package title while keeping Receive, Delete, and carrier actions aligned at the right edge.
+- Added an All-view footer for downloading received shipment history as CSV or a real multi-page PDF.
+- Added truthful completion timestamps for newly received packages and safe local export handling with no new Chrome permissions.
+
 ## 0.4.1 - 2026-08-13
 
 - Replaced the always-open package form with a collapsed, keyboard-friendly Add package control.

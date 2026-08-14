@@ -22,6 +22,7 @@ TrackerPal puts a focused package dashboard in Chrome's side panel, so delivery 
 - Open the correct carrier tracking page with one click.
 - Update delivery status and mark packages received.
 - Keep deliveries sorted by their automatic entry date, with an option to correct that date later.
+- Download received shipment history as CSV or PDF from the All view.
 - Keep package information locally in the Chrome profile.
 - Delete individual entries whenever they are no longer needed.
 
@@ -35,7 +36,7 @@ TrackerPal's single purpose is to let users record, review, and act on package d
 
 **sidePanel:** Displays the TrackerPal delivery dashboard in Chrome's side panel when the user clicks the extension icon.
 
-**storage:** Stores the user's package entries and consent choice locally in the user's Chrome profile. Stored entry fields are package name, tracking number or optional pickup address, carrier, delivery status, received state, and entry date.
+**storage:** Stores the user's package entries and consent choice locally in the user's Chrome profile. Stored entry fields are package name, tracking number or optional pickup address, carrier, delivery status, received state, entry date, and completion date when available.
 
 The extension does not request host permissions or permission to read tabs, websites, browsing history, email, cookies, or location.
 
@@ -46,6 +47,7 @@ The extension does not request host permissions or permission to read tabs, webs
 - Handles location information: **Yes — only that optional typed pickup address; TrackerPal does not read device or browser location**
 - Sends a selected tracking number to a carrier: **Yes — only when the user clicks the package's carrier pill, by opening that carrier's URL**
 - Sends pickup addresses anywhere: **No**
+- Creates CSV or PDF history files: **Yes â€” locally and only after the user clicks a download button; the files are not uploaded**
 - Sends package data to the TrackerPal developer: **No**
 - Handles authentication information: **No**
 - Handles website content or browsing activity: **No**
@@ -65,10 +67,11 @@ Privacy policy: `https://github.com/Excellonline/tracker-pal/blob/main/docs/PRIV
 6. Add another entry with carrier **Pickup**; confirm the field changes to **Address (optional)** and that the entry can be saved with that field empty.
 7. Click an entry-date pill, change the date, and confirm the list stays ordered newest first.
 8. Click the red status pill and change its value, then click the checkmark button and confirm the package leaves the **Open** view.
-9. Use the **All** filter to confirm the received package remains available.
-10. Click the **UPS** carrier pill and confirm Chrome opens UPS with the sample tracking number in the URL.
-11. Delete both sample entries.
-12. Open **Privacy**, use **Delete all TrackerPal data**, and confirm the first-run disclosure returns when the side panel is opened again.
+9. Use the **All** filter to confirm the received package remains available and the **Completed history** footer appears above the local-storage note.
+10. Download CSV and PDF; confirm both files include the received sample and exclude the open pickup entry.
+11. Click the **UPS** carrier pill and confirm Chrome opens UPS with the sample tracking number in the URL.
+12. Delete both sample entries.
+13. Open **Privacy**, use **Delete all TrackerPal data**, and confirm the first-run disclosure returns when the side panel is opened again.
 
 No test account, credentials, external setup, Gmail access, or Google Sheets access is required.
 
@@ -80,7 +83,7 @@ Run `npm run build:store`. The resulting ZIP contains only the native side-panel
 
 ## Upload assets
 
-- Package: `dist/trackerpal-chrome-store-v0.4.1.zip`
+- Package: `dist/trackerpal-chrome-store-v0.4.2.zip`
 - Store icon: `store-assets/icon-128x128.png`
 - Screenshot: `store-assets/screenshot-01-side-panel-1280x800.png`
 - Small promotional tile: `store-assets/promo-small-440x280.png`

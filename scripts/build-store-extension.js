@@ -11,6 +11,7 @@ const output = path.join(dist, "trackerpal-chrome-store");
 const zip = path.join(dist, `trackerpal-chrome-store-v${manifest.version}.zip`);
 const sharedFiles = [
   "background.js",
+  "exports.js",
   "packages.js",
   "privacy.css",
   "privacy.html",
