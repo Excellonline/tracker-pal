@@ -20,8 +20,8 @@ No TrackerPal backend is required. Local extension entries stay in the Chrome pr
 
 ## Highlights
 
-- Native Chrome side-panel tracker with automatic UPS, USPS, FedEx, and DHL recognition.
-- Local package storage, one-click carrier links, status controls, and received-package history.
+- Native Chrome side-panel tracker with automatic UPS, USPS, FedEx, and DHL recognition plus optional-address pickup entries.
+- Local package storage, newest-first editable entry dates, one-click carrier links, status controls, and received-package history.
 - Minimal Chrome permissions: side panel and storage only, with no website access.
 - Gmail scanner for order confirmations, shipment notices, delivery updates, delays, and exceptions.
 - Google Sheets dashboard with open items, overdue packages, due-today packages, delivered-but-unchecked items, and missing ETA alerts.
@@ -135,7 +135,7 @@ From Gmail, apply the label `TrackerPal` to force-import a low-signal message th
 
 ## Privacy
 
-TrackerPal has no analytics, advertising, or developer-owned data service. Extension entries stay in Chrome. Clicking **Track** opens the chosen carrier's website and therefore sends that tracking number to the carrier. Gmail messages used by the optional personal workflow are processed inside the owner's Apps Script project and stored in the owner's Google Sheet.
+TrackerPal has no analytics, advertising, or developer-owned data service. Extension entries stay in Chrome. Clicking a package's carrier pill opens the chosen carrier's website and therefore sends that tracking number to the carrier. Gmail messages used by the optional personal workflow are processed inside the owner's Apps Script project and stored in the owner's Google Sheet.
 
 Keep deployment URLs, secret keys, `.clasp.json`, `.clasprc.json`, and Google project IDs out of commits, issues, screenshots, and public docs.
 

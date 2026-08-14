@@ -75,5 +75,13 @@ if (fs.existsSync(shortcut)) {
   }
 }
 
-execFileSync("tar.exe", ["-a", "-c", "-f", zip, "-C", output, "."], { stdio: "inherit" });
+const zipEntries = fs.readdirSync(output).sort();
+execFileSync("tar.exe", ["-a", "-c", "-f", zip, "-C", output, ...zipEntries], { stdio: "inherit" });
+
+const archivedEntries = execFileSync("tar.exe", ["-t", "-f", zip], { encoding: "utf8" })
+  .split(/\r?\n/)
+  .filter(Boolean);
+if (!archivedEntries.includes("manifest.json")) {
+  throw new Error("Store ZIP must contain manifest.json at the archive root.");
+}
 console.log(zip);

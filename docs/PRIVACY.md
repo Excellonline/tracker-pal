@@ -6,17 +6,19 @@ TrackerPal is a local package-tracking Chrome extension. Its single purpose is t
 
 ## First-run disclosure and consent
 
-Before TrackerPal reads or stores a package list, the extension displays a plain-language disclosure and asks the user to continue. It explains both local storage and what happens when the user clicks **Track**. The consent choice is stored locally in the user's Chrome profile.
+Before TrackerPal reads or stores a package list, the extension displays a plain-language disclosure and asks the user to continue. It explains both local storage and what happens when the user clicks a carrier tracking button. The consent choice is stored locally in the user's Chrome profile.
 
 ## Data TrackerPal handles
 
-TrackerPal may store package names, tracking numbers, selected carriers, delivery statuses, received states, and entry dates. This information is stored locally in the user's Chrome profile using Chrome's extension storage feature.
+TrackerPal may store package names, tracking numbers or optional pickup addresses, selected carriers, delivery statuses, received states, and entry dates. This information is stored locally in the user's Chrome profile using Chrome's extension storage feature.
+
+An optional pickup address is personally identifiable and location information supplied directly by the user. TrackerPal does not read device location, browser location, or location from visited websites.
 
 TrackerPal does not operate an analytics service, advertising service, or developer-owned server that receives the package list. The public Chrome Web Store package contains no Google Apps Script integration, remote dashboard, account credentials, private deployment URL, or spreadsheet identifier.
 
 ## Carrier tracking links
 
-When a user clicks **Track**, TrackerPal opens the selected carrier's official website in a new tab. The package's tracking number is included in the carrier URL so the carrier can display the shipment. This happens only after the user's click. The carrier handles that visit under its own privacy policy.
+When a user clicks a shipped package's carrier pill, TrackerPal opens that carrier's official website in a new tab. The package's tracking number is included in the carrier URL so the carrier can display the shipment. This happens only after the user's click. Pickup entries do not open a carrier website or transfer their optional address. The carrier handles a tracking-page visit under its own privacy policy.
 
 ## How data is used
 

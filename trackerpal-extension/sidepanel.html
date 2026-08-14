@@ -12,11 +12,13 @@
         <img src="icons/icon-48.png" alt="">
         <div>
           <strong><span>Tracker</span><em>Pal</em></strong>
-          <small>Package control center</small>
+          <small>Your delivery desk</small>
         </div>
       </div>
       <div class="header-actions">
-        <button id="settingsButton" type="button">Settings</button>
+        <button class="icon-button" id="settingsButton" type="button" aria-label="Open settings" title="Settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 13.1c.04-.36.04-.74 0-1.1l1.7-1.33-1.8-3.12-2 .8a8.2 8.2 0 0 0-.96-.56L16.05 5h-3.6l-.3 2.12c-.34.16-.66.35-.96.56l-2-.8-1.8 3.12L9.1 12c-.04.36-.04.74 0 1.1l-1.7 1.33 1.8 3.12 2-.8c.3.22.62.4.96.56l.3 2.12h3.6l.29-2.12c.34-.16.66-.34.96-.56l2 .8 1.8-3.12-1.7-1.33Z"/></svg>
+        </button>
       </div>
     </header>
 
@@ -29,39 +31,57 @@
       <section class="packages-view" id="packagesView">
         <div class="stats" id="stats" aria-label="Package summary"></div>
 
-        <form class="quick-add" id="packageForm">
-          <h1>Add a package</h1>
-          <label for="item">Package name</label>
-          <input id="item" name="item" required maxlength="80" placeholder="Coffee filters">
-          <div class="form-row">
-            <div>
-              <label for="trackingNumber">Tracking number</label>
-              <input id="trackingNumber" name="trackingNumber" required maxlength="40" autocomplete="off" placeholder="1Z…">
+        <details class="add-package" id="addPackagePanel">
+          <summary id="addPackageToggle">
+            <span class="add-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+            <span class="add-copy"><strong>Add a package</strong><small>Save a delivery or pickup</small></span>
+            <svg class="disclosure-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg>
+          </summary>
+          <form class="quick-add" id="packageForm">
+            <label for="item">Package name</label>
+            <input id="item" name="item" required maxlength="80" placeholder="Coffee filters">
+            <div class="form-row">
+              <div>
+                <label id="trackingFieldLabel" for="trackingNumber">Tracking number</label>
+                <input id="trackingNumber" name="trackingNumber" required maxlength="40" autocomplete="off" placeholder="1Z999AA10123456784">
+              </div>
+              <div>
+                <label for="carrier">Carrier</label>
+                <select id="carrier" name="carrier">
+                  <option value="Auto">Auto detect</option>
+                  <option>Pickup</option>
+                  <option>UPS</option>
+                  <option>USPS</option>
+                  <option>FedEx</option>
+                  <option>DHL</option>
+                  <option>Other</option>
+                </select>
+              </div>
             </div>
-            <div>
-              <label for="carrier">Carrier</label>
-              <select id="carrier" name="carrier">
-                <option value="Auto">Auto detect</option>
-                <option>UPS</option>
-                <option>USPS</option>
-                <option>FedEx</option>
-                <option>DHL</option>
-                <option>Other</option>
-              </select>
+            <div class="form-actions">
+              <button id="cancelAddButton" type="button">Cancel</button>
+              <button class="primary add-button" type="submit">Add package</button>
             </div>
-          </div>
-          <button class="primary add-button" type="submit">Add package</button>
-        </form>
+          </form>
+        </details>
 
-        <div class="list-heading">
-          <h2>Deliveries</h2>
-          <div class="list-filters" aria-label="Filter packages">
-            <button class="filter active" type="button" data-filter="open" aria-pressed="true">Open</button>
-            <button class="filter" type="button" data-filter="all" aria-pressed="false">All</button>
+        <section class="delivery-workspace" aria-labelledby="deliveriesTitle">
+          <div class="list-heading">
+            <div>
+              <h1 id="deliveriesTitle">Deliveries</h1>
+              <p id="deliverySummary">Your saved packages</p>
+            </div>
+            <div class="list-filters" aria-label="Filter packages">
+              <button class="filter active" type="button" data-filter="open" aria-pressed="true">Open</button>
+              <button class="filter" type="button" data-filter="all" aria-pressed="false">All</button>
+            </div>
           </div>
-        </div>
-        <div class="package-list" id="packageList"></div>
-        <p class="local-note">Package details stay in Chrome on this device.</p>
+          <div class="package-list" id="packageList" role="list"></div>
+          <footer class="local-note">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2M6 10h12v10H6z"/></svg>Package details stay in Chrome on this device.</span>
+            <small>Designed by Sev</small>
+          </footer>
+        </section>
       </section>
 
       <section class="synced-view" id="syncedView" hidden>
@@ -90,8 +110,8 @@
         <span>Before you start</span>
       </div>
       <h2 id="consentTitle">Your package details stay in Chrome</h2>
-      <p id="consentSummary">TrackerPal stores the package name, tracking number, carrier, status, and received state locally in this Chrome profile. TrackerPal does not send that list to our servers.</p>
-      <p id="consentTracking">When you click <strong>Track</strong>, Chrome opens the carrier's website and includes that package's tracking number in the carrier URL.</p>
+      <p id="consentSummary">TrackerPal stores the package name, tracking number or optional pickup address, carrier, status, and received state locally in this Chrome profile. TrackerPal does not send that list to our servers.</p>
+      <p id="consentTracking">When you click a package's <strong>carrier button</strong>, Chrome opens the carrier's website and includes that package's tracking number in the carrier URL.</p>
       <a class="privacy-link" href="privacy.html" target="_blank" rel="noopener">Read the bundled privacy details</a>
       <button class="primary consent-button" id="acceptPrivacy" type="button">I understand — continue</button>
     </dialog>

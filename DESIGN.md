@@ -107,14 +107,14 @@ components:
 
 TrackerPal is a modern, focused operations surface: calm enough for repeated daily use, but decisive when a package needs attention. A light green ambient scene and forest-ink information frame keep the console crisp; operational emerald carries actions, focus, links, selection, due-today cues, and healthy state.
 
-The visual identity is entirely emerald. The wordmark and brand icon use deep and bright emerald together, while metrics, filters, table signals, and form controls form a compact scan-and-act rhythm. Red remains strictly semantic for overdue, exception, destructive, and error states; all routine and positive signals stay green or neutral.
+The visual identity is entirely emerald. The wordmark and brand icon use deep and bright emerald together, while metrics, filters, table signals, and form controls form a compact scan-and-act rhythm. Red remains semantic for overdue, exception, destructive, and error states, with one explicit side-panel exception: the editable status pill uses red type to stay easy to find in dense delivery rows.
 
 **Key Characteristics:**
 
 - Emerald-led hierarchy across branding, actions, focus, links, and successful state.
 - Forest-tinted text, white work surfaces, and pale green ambient backgrounds.
 - Deep and bright emerald form the TrackerPal wordmark and icon signature.
-- Compact status density with generous 44px interaction targets.
+- Compact status density with generous primary targets and deliberate micro-actions in the browser side panel.
 - Responsive data presentation that becomes labeled rows on small screens.
 
 ## Colors
@@ -133,7 +133,7 @@ The palette is cool, professional, and consistently emerald, with red reserved f
 
 ### Tertiary
 
-- **Exception Red:** Reserved for overdue, exception, destructive, and error states.
+- **Exception Red:** Reserved for overdue, exception, destructive, and error states, plus the side-panel's explicit editable-status cue.
 
 ### Neutral
 
@@ -148,7 +148,7 @@ The palette is cool, professional, and consistently emerald, with red reserved f
 
 **The Emerald Continuity Rule.** Brand marks, primary actions, focus rings, links, selected states, and success feedback stay within the emerald family.
 
-**The Status Has Meaning Rule.** Bright and muted emerald distinguish routine status; red is reserved for exceptions and errors. Color always supplements explicit text.
+**The Status Has Meaning Rule.** Bright and muted emerald distinguish routine state throughout the main app. In the browser side panel, red status text is an intentional edit affordance requested for dense package rows. Color always supplements explicit text.
 
 **The One Brand Family Rule.** Do not introduce a separate accent family into the wordmark, icon, or routine interface controls.
 
@@ -177,13 +177,13 @@ The palette is cool, professional, and consistently emerald, with red reserved f
 
 The main app sits in a centered fluid container capped at 1360px, with responsive horizontal padding from 16px to 40px. Brand and actions share the top row; seven status metrics form the next scan layer; the search, filter, and order workspace is the dominant surface below. Spacing is compact and repeatable, using 6-24px gaps and insets.
 
-The base layout first collapses into a one-column toolbar and form at 860px; the later visual-system overrides keep metrics at four columns until 1080px and stop constraining the order region's height. At 680px, actions form a two-column control grid with the primary action full-width, metrics become two columns, filters become a horizontally scrollable rail, the modal docks toward the bottom, and the table becomes labeled rows with the received control held in a dedicated first column. The browser side panel keeps the same emerald system in a narrower card-based layout and stacks its form below 380px.
+The base layout first collapses into a one-column toolbar and form at 860px; the later visual-system overrides keep metrics at four columns until 1080px and stop constraining the order region's height. At 680px, actions form a two-column control grid with the primary action full-width, metrics become two columns, filters become a horizontally scrollable rail, the modal docks toward the bottom, and the table becomes labeled rows with the received control held in a dedicated first column. The browser side panel uses a single emerald summary rail, a collapsed Add package disclosure, and one connected delivery surface. Each row keeps its red editable status pill, Receive and Delete icons, and carrier tracking pill on one compact scan line; tracking or pickup location and the editable entry date share the metadata line beneath it.
 
 **The Data Reflows Rule.** Never preserve a desktop-width table by forcing horizontal page scrolling on mobile; convert columns into explicit labeled rows.
 
 ## Elevation & Depth
 
-Depth is layered but restrained. Pale green tonal backgrounds establish the ambient scene, white surfaces establish work zones, and translucent deep-ink shadows separate only the principal workspace, metric cards, floating feedback, dialog, and compact side-panel cards. Hover elevation is a small response, not a decorative float.
+Depth is layered but restrained. Pale green tonal backgrounds establish the ambient scene, white surfaces establish work zones, and translucent deep-ink shadows separate only the principal workspace, metric cards, floating feedback, dialog, and connected side-panel workspace. Delivery rows use dividers and tonal hover feedback instead of individual card shadows. Hover elevation is a small response, not a decorative float.
 
 ### Shadow Vocabulary
 
@@ -213,6 +213,7 @@ Forms are gently rounded and practical: 10px for fields and selectors, 11-12px f
 ### Buttons
 
 - **Shape:** Solid, substantial controls with gently rounded corners and a 44px minimum height in the main app.
+- **Side-panel Micro-actions:** Dense delivery rows use 30-32px icon controls with explicit hover titles, package-specific accessible names, visible focus, and delete confirmation.
 - **Primary:** Operational emerald with white text and 16px horizontal padding.
 - **Hover / Focus:** Hover lifts by 1px with a slightly stronger shadow; keyboard focus uses a 3px emerald outline with a 2px offset; active state returns to the baseline.
 - **Secondary / Caution:** Secondary actions are white with a cool border. Cautionary controls use a pale emerald field, emerald border, and deep emerald text; destructive meaning is carried by explicit red labels or feedback.
@@ -224,9 +225,9 @@ Forms are gently rounded and practical: 10px for fields and selectors, 11-12px f
 
 ### Cards / Containers
 
-- **Corner Style:** 14px main metrics, 15px side-panel package cards, and 16px principal surfaces.
+- **Corner Style:** 14px main metrics and side-panel summary/disclosure surfaces, plus 16px principal workspaces.
 - **Background:** White over a pale green ambient scene.
-- **Shadow Strategy:** Ambient metric and package-card shadows; stronger workspace shadow.
+- **Shadow Strategy:** Ambient metric shadows and one stronger workspace shadow; delivery rows remain flat within their shared surface.
 - **Border:** Metrics and principal workspaces are borderless; internal rows and toolbars use quiet dividers.
 - **Internal Padding:** 13-18px metrics and 14-20px task regions.
 
@@ -261,7 +262,7 @@ The add-order dialog uses a dimmed, blurred backdrop, a 16px white surface, a tw
 ### Don't:
 
 - **Don't** reintroduce a non-emerald split-color treatment into TrackerPal branding.
-- **Don't** use red as decoration or as a routine accent; it communicates overdue, exception, destructive, and error states only.
+- **Don't** use red as decoration; outside the documented side-panel status edit cue, it communicates overdue, exception, destructive, and error states only.
 - **Don't** add glassy, colored, or theatrical shadows; elevation stays neutral and operational.
-- **Don't** compress dense controls below their source-defined touch targets or hide state behind color alone.
+- **Don't** compress primary controls below their source-defined targets or hide state behind color alone; compact side-panel actions must retain icons, titles, accessible names, and visible focus.
 - **Don't** allow untrusted tracking protocols or remove the dialog, focus, reduced-motion, and live-feedback safeguards.

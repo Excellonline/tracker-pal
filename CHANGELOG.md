@@ -2,6 +2,18 @@
 
 All notable changes to TrackerPal will be documented in this file.
 
+## 0.4.1 - 2026-08-13
+
+- Replaced the always-open package form with a collapsed, keyboard-friendly Add package control.
+- Reworked deliveries into a dense, clean list with a red editable status pill, compact Receive/Delete icons, and carrier tracking pills.
+- Added a quiet “Designed by Sev” credit beneath the local-storage notice.
+- Added Pickup as a carrier option with an optional address field and no external address transfer.
+- Added automatic entry dates, newest-first ordering, and a compact editable date control on every delivery.
+- Simplified the package summary into a single emerald status strip and reduced repetitive card styling.
+- Added narrow-panel behavior, item-specific accessible action names, and safer nested-icon click handling.
+- Corrected Store ZIP entries so `manifest.json` is written at the archive root.
+- Refreshed the Chrome Web Store screenshot to match the redesigned side panel.
+
 ## 0.4.0 - 2026-08-13
 
 - Added a native Manifest V3 Chrome side-panel extension with local package tracking.
